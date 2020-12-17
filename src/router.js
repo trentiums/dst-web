@@ -8,7 +8,7 @@ const Register = lazy(() => import('./containers/register'))
 const Login = lazy(() => import('./containers/login'))
 
 function Router() {
-  const { navOption } = useSelector(state => ({
+  const { navOption } = useSelector((state) => ({
     navOption: state.navOption,
   }))
   return (

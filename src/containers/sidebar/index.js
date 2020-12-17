@@ -9,7 +9,7 @@ import './sidebar.css'
 function Sidebar() {
   const [hoverIndex, setHoverIndex] = useState(-1)
   const dispatch = useDispatch()
-  const { navOption } = useSelector(state => ({
+  const { navOption } = useSelector((state) => ({
     navOption: state.navOption,
   }))
   return (
