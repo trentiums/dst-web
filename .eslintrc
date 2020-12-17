@@ -20,9 +20,13 @@
     "import/no-unresolved": 0,
     "no-console": 0
   },
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "legacyDecorators": true
-    }
+    },
+    "sourceType": "module",
+    "allowImportExportEverywhere": true,
+    "codeFrame": false
   }
 }
