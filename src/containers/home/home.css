@@ -1,0 +1,6 @@
+.page_container {
+  display: flex;
+  min-height: calc(100vh - 50px);
+  width: 100%;
+  justify-content: center;
+}

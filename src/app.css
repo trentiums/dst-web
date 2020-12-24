@@ -1,13 +1,27 @@
 .main_container {
   display: flex;
   margin-left: 50px;
+  padding-top: 50px;
+  transition: 300ms ease all;
 }
 .main_container.active {
   margin-left: 250px;
 }
-
+.main_container.user_not_found {
+  margin-left: 0px;
+}
 @media only screen and (max-width: 767px) {
   .main_container {
     margin-left: 0px;
   }
+  .main_container.active {
+    margin-left: 0px;
+  }
+}
+.swiper-button-prev,
+.swiper-button-next {
+  color: #0286be !important;
+}
+.input-container {
+  position: static !important;
 }

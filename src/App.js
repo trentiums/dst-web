@@ -1,9 +1,11 @@
 import React, { lazy, Suspense } from 'react'
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import { NotificationContainer } from 'react-notifications'
 import Router from './router'
 import Loader from './containers/loader'
-import { BrowserRouter } from 'react-router-dom'
-import store from './store'
+import store from './services/store'
+import '../node_modules/react-notifications/lib/notifications.css'
 
 const Sidebar = lazy(() => import('./containers/sidebar'))
 function App() {
@@ -11,6 +13,7 @@ function App() {
     <Provider store={store}>
       <Suspense fallback={<Loader />}>
         <BrowserRouter>
+          <NotificationContainer />
           <Sidebar />
           <Router />
         </BrowserRouter>
