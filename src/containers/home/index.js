@@ -4,7 +4,7 @@ import CustomSwiper from '../../components/customSwiper'
 import './home.css'
 function Home() {
   return (
-    <div className="page_container">
+    <div className="home_container">
       <CustomSwiper swiperItems={images.swiper} />
     </div>
   )

@@ -4,6 +4,7 @@ import { NotificationManager } from 'react-notifications'
 import './login.css'
 import images from '../../assets/images'
 import { auth } from '../../services/firebase'
+import OrHorizontalBar from '../../components/orHorizontalBar'
 
 function Login() {
   const initialState = {
@@ -53,9 +54,7 @@ function Login() {
       }
     } catch (error) {
       NotificationManager.error(
-        error?.message ||
-          error.toString() ||
-          'Server error. Could not modify your profile data. Please try again',
+        error?.message || error.toString() || 'Server error. Please try again',
       )
       setLoading(false)
       console.log('error :', error)
@@ -97,10 +96,32 @@ function Login() {
               onChange={(e) => handleChange(e, 'password')}
             />
           </div>
-          <div className="button mt-3 mb-5" onClick={handleSubmit}>
-            <div className="buttonText">OK</div>
+          <div className="navLink fgPass mt-1" onClick={() => history.push('forgotPass')}>
+            Forgot Password?
+          </div>
+          <div className="button mt-3" onClick={handleSubmit}>
+            <div className="buttonText">Login</div>
+          </div>
+          <OrHorizontalBar />
+          <div className="mt-2 mb-2 text-center">Login with social media</div>
+          <div className="row justify-content-center ml-1 mr-1">
+            <div className=" col-md-4 button fbBtn" onClick={() => {}}>
+              <i class="fa fa-facebook" style={{ fontSize: 24 }}></i>
+            </div>
+            <div className=" col-md-4 button appleBtn" onClick={() => {}}>
+              <i class="fa fa-apple" style={{ fontSize: 24 }}></i>
+            </div>
+            <div className=" col-md-4 button googleBtn" onClick={() => {}}>
+              <i class="fa fa-google" style={{ fontSize: 24 }}></i>
+            </div>
           </div>
         </form>
+      </div>
+      <div className="mt-2 mb-5">
+        Didn't have an account yet?{' '}
+        <span className="navLink mt-2 mb-5" onClick={() => history.push('register')}>
+          Sign Up
+        </span>
       </div>
     </div>
   )

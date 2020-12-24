@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import 'bootstrap/dist/css/bootstrap.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
 window.$ = window.jQuery = require('jquery')
 
 ReactDOM.render(

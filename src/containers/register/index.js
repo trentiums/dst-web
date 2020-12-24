@@ -6,6 +6,7 @@ import './register.css'
 import images from '../../assets/images'
 import { updateUserInfo, updateUserPicture } from '../../redux/user/actions'
 import { auth } from '../../services/firebase'
+import OrHorizontalBar from '../../components/orHorizontalBar'
 
 function Register() {
   const initialState = {
@@ -203,9 +204,28 @@ function Register() {
             ))}
           </div>
           <div className="button" onClick={handleSubmit}>
-            <div className="buttonText">OK</div>
+            <div className="buttonText">Register</div>
+          </div>
+          <OrHorizontalBar />
+          <div className="mt-2 mb-2 text-center">Register with social media</div>
+          <div className="row justify-content-center ml-1 mr-1">
+            <div className=" col-md-4 button fbBtn" onClick={() => {}}>
+              <i class="fa fa-facebook" style={{ fontSize: 24 }}></i>
+            </div>
+            <div className=" col-md-4 button appleBtn" onClick={() => {}}>
+              <i class="fa fa-apple" style={{ fontSize: 24 }}></i>
+            </div>
+            <div className=" col-md-4 button googleBtn" onClick={() => {}}>
+              <i class="fa fa-google" style={{ fontSize: 24 }}></i>
+            </div>
           </div>
         </form>
+      </div>
+      <div className="mt-2 mb-3">
+        Already have an account ?{' '}
+        <span className="navLink mt-2" onClick={() => history.push('login')}>
+          Sign In
+        </span>
       </div>
     </div>
   )
