@@ -1,10 +1,18 @@
-export const routesList = [
+export const sidebarList = [
   {
     text: 'Home',
     path: '/',
     iconName: 'fa fa-home',
     iconSize: '20px',
   },
+  {
+    text: 'Logout',
+    path: '/login',
+    iconName: 'fa fa-sign-out',
+    iconSize: '20px',
+  },
+]
+export const topbarList = [
   {
     text: 'Register',
     path: '/register',
