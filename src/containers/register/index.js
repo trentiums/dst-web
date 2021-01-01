@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux'
 import { NotificationManager } from 'react-notifications'
 import './register.css'
 import images from '../../assets/images'
-import { updateUserInfo, updateUserPicture } from '../../redux/user/actions'
-import { auth } from '../../services/firebase'
+import { guestLogin } from '../../redux/user/actions'
+import { auth, doSignInWithGoogle, doSignInWithFacebook } from '../../services/firebase'
 import OrHorizontalBar from '../../components/orHorizontalBar'
 
 function Register() {
@@ -50,6 +50,7 @@ function Register() {
       errors['confirmPass'] = 'Confirm password should be at least 6 digits.\n'
     }
     if (fields['password'] !== fields['confirmPass']) {
+      errors['password'] = ` `
       errors['confirmPass'] = `Password and confirm password doesn't matched.\n`
     }
     if (Object.keys(errors).length) {
@@ -66,38 +67,50 @@ function Register() {
       setLoading(true)
       e.preventDefault()
       if (handleValidation()) {
-        await auth.createUserWithEmailAndPassword(
+        let res = await auth.createUserWithEmailAndPassword(
           registerDetails.fields.email,
           registerDetails.fields.password,
         )
+        await res.user.updateProfile({
+          displayName: registerDetails.fields.name,
+        })
+        let response = await auth.currentUser
+        let params = {
+          startParameters: {
+            firstName: response.displayName.split(' ')[0],
+            lastName: response.displayName.split(' ')[1],
+            nickName: response.displayName,
+            email: response.email,
+          },
+          deviceId: response.uid,
+        }
         if (selectedAvatarIndex !== null) {
-          await dispatch(
-            updateUserPicture({
-              picture: images.avatars[selectedAvatarIndex],
-            }),
+          params.startParameters.picture = images.avatars[selectedAvatarIndex].replace(
+            'data:image/png;base64,',
+            '',
           )
         }
-        await dispatch(
-          updateUserInfo({
-            ...registerDetails.fields,
-            nickName: registerDetails.fields.name,
-            email: registerDetails.fields.email,
-            firstName: registerDetails.fields.firstName,
-            lastName: registerDetails.fields.lastName,
-          }),
-        )
-        history.push('/')
+        await dispatch(guestLogin(params))
+        onSuccessLogin()
       } else {
         return
       }
     } catch (error) {
       NotificationManager.error(
         error?.message ||
-          error?.toString() ||
-          'Server error. Could not modify your profile data. Please try again',
+          error?.response?.data?.messsage ||
+          error.toString() ||
+          'Server error. Please try again',
       )
       setLoading(false)
-      console.log('error :', error)
+    }
+  }
+  const onSuccessLogin = async () => {
+    try {
+      setLoading(false)
+      history.push('/')
+    } catch (error) {
+      throw error
     }
   }
 
@@ -112,6 +125,58 @@ function Register() {
     setSelectedAvatarIndex(index)
   }
 
+  const socialSignIn = async (platform) => {
+    try {
+      setLoading(true)
+      if (platform === 'facebook') {
+        let response = await doSignInWithFacebook()
+        let params = {
+          startParameters: {
+            firstName: response.additionalUserInfo.profile.first_name,
+            lastName: response.additionalUserInfo.profile.last_name,
+            nickName: response.additionalUserInfo.profile.name,
+            email: response.additionalUserInfo.profile.email,
+          },
+          deviceId: response.user.uid,
+        }
+        if (selectedAvatarIndex !== null) {
+          params.startParameters.picture = images.avatars[selectedAvatarIndex].replace(
+            'data:image/png;base64,',
+            '',
+          )
+        }
+        await dispatch(guestLogin(params))
+        onSuccessLogin()
+      } else if (platform === 'google') {
+        let response = await doSignInWithGoogle()
+        let params = {
+          startParameters: {
+            firstName: response.additionalUserInfo.profile.given_name,
+            lastName: response.additionalUserInfo.profile.family_name,
+            nickName: response.additionalUserInfo.profile.name,
+            email: response.additionalUserInfo.profile.email,
+          },
+          deviceId: response.user.uid,
+        }
+        if (selectedAvatarIndex !== null) {
+          params.startParameters.picture = images.avatars[selectedAvatarIndex].replace(
+            'data:image/png;base64,',
+            '',
+          )
+        }
+        await dispatch(guestLogin(params))
+        onSuccessLogin()
+      }
+    } catch (error) {
+      NotificationManager.error(
+        error?.message ||
+          error?.response?.data?.messsage ||
+          error.toString() ||
+          'Signup Failed. Something went worng',
+      )
+      setLoading(false)
+    }
+  }
   return (
     <div className="page_container">
       <div className="box">
@@ -204,19 +269,22 @@ function Register() {
             ))}
           </div>
           <div className="button" onClick={handleSubmit}>
+            {loading && (
+              <img src={images.loader} className="mr-2" width="20px" height="20px" alt=""></img>
+            )}
             <div className="buttonText">Register</div>
           </div>
           <OrHorizontalBar />
-          <div className="mt-2 mb-2 text-center">Register with social media</div>
+          <div className="mt-2 mb-2 text-center">Login with social media</div>
           <div className="row justify-content-center ml-1 mr-1">
-            <div className=" col-md-4 button fbBtn" onClick={() => {}}>
-              <i class="fa fa-facebook" style={{ fontSize: 24 }}></i>
+            <div className=" col-md-4 button fbBtn" onClick={() => socialSignIn('facebook')}>
+              <i className="fa fa-facebook" style={{ fontSize: 24 }}></i>
             </div>
             <div className=" col-md-4 button appleBtn" onClick={() => {}}>
-              <i class="fa fa-apple" style={{ fontSize: 24 }}></i>
+              <i className="fa fa-apple" style={{ fontSize: 24 }}></i>
             </div>
-            <div className=" col-md-4 button googleBtn" onClick={() => {}}>
-              <i class="fa fa-google" style={{ fontSize: 24 }}></i>
+            <div className=" col-md-4 button googleBtn" onClick={() => socialSignIn('google')}>
+              <i className="fa fa-google" style={{ fontSize: 24 }}></i>
             </div>
           </div>
         </form>

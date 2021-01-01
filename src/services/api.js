@@ -12,7 +12,7 @@ const Api: AxiosInstance = axios.create({
 
 export const urls = {
   checkCookie: '/login/checkcookie',
-  guestLogin: '/login/guest?deviceId={0}',
+  guestLogin: '/login/guest',
   checkClientVersion: '/version/client',
   register: '/login/registerdevice', // device registration
   teamSpaceList: '/teamspace/user/{0}',
@@ -29,8 +29,8 @@ export const urls = {
   getLicense: '/license/{0}', // /license/{teamSpaceUid}
   getPackages: '/license/packages',
   getCardSets: '/cardset',
-  userPicbase: '/user/{0}/picturebase', // /user/{userUid}/picture - used only for update. For get please use photoPath/image from user object
-  userDetails: '/user/{0}', // GET /user/{userUid}
+  userPicbase: '/picturebase', // /user/{userUid}/picture - used only for update. For get please use photoPath/image from user object
+  userDetails: '/user', // GET /user/{userUid}
   updateUser: '/user/{0}', // PUT /user/{userUid}
   layoutCardsList: '/cardsetinfo/{0}', // GET /cardsetinfo/{layout} i.e. cardsetinfo/DELEGATION_POKER_DEFAULT
   activeLayouts: '/estimationlayouts/{0}', // GET /estimationlayouts/{userUid}

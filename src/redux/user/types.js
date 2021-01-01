@@ -6,6 +6,7 @@ const types = {
   REFRESH_USER: 'REFRESH_USER',
   USER_TYPE: 'USER_TYPE',
   RESET_LAYOUT: 'RESET_LAYOUT',
+  USER_LOGOUT: 'USER_LOGOUT',
 }
 
 export default types

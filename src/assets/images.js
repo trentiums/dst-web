@@ -1,6 +1,7 @@
 import logo from './images/logo.png'
 import angledoubleleft from './images/angle-double-left.svg'
 import hamburgMenu from './images/menu.svg'
+import loader from './images/loader.svg'
 import avatar1 from './images/avatars/avatar-01.png'
 import avatar2 from './images/avatars/avatar-02.png'
 import avatar3 from './images/avatars/avatar-03.png'
@@ -22,6 +23,7 @@ const images = {
   logo,
   angledoubleleft,
   hamburgMenu,
+  loader,
   avatars: [
     avatar1,
     avatar2,

@@ -27,6 +27,7 @@
   justify-content: center;
   border-radius: 5px;
   background-color: #6dbd8e;
+  color: #ffffff;
   padding: 0.4rem;
 }
 .button:active {
@@ -37,8 +38,8 @@
   color: #ffffff;
 }
 .logoImage {
-  height: 10rem;
-  width: 10rem;
+  height: 8rem;
+  width: 8rem;
 }
 .fgPass {
   font-weight: normal !important;
@@ -53,6 +54,8 @@
   color: rgba(2, 134, 190, 0.7);
 }
 .fbBtn {
+  margin: 0px;
+  width: 100%;
   padding: 0.5rem;
   color: #ffffff;
   background-color: #3b5999 !important;

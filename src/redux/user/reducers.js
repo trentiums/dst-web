@@ -29,18 +29,14 @@ export default function userReducer(state = initialState, action) {
 
       return state
     case types.USER_UPDATE_SUCCESS:
-      console.log(action.payload)
       userData = action.payload
       state = {
         ...state,
+        ...userData,
         validUser: true,
         username: userData.username,
         password: userData.username,
-        nickname: userData.nickname,
-        uid: userData.uid,
-        startWithSingleUserSpace: userData.startWithSingleUserSpace,
       }
-
       return state
     case types.USER_LOGIN_AUTH_ERROR:
       alert('Authentication failed')
@@ -67,6 +63,10 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         layoutFor: 'OWNER',
+      }
+    case types.USER_LOGOUT:
+      return {
+        ...initialState,
       }
     default:
       return state

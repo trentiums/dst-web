@@ -6,6 +6,7 @@
   box-shadow: 2px 2px 2px #ccc;
   display: flex;
   flex-direction: column;
+  z-index: 999;
 }
 .header ul {
   background: #333333;
@@ -67,6 +68,20 @@
   text-decoration: none;
   color: #ffffff;
 }
+.profileContainer {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 14px;
+  margin: 10px;
+  padding: 0.3rem 1rem;
+}
+.profileContainer:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
 .menuContainer {
   display: flex;
   position: absolute;
@@ -92,7 +107,8 @@
   text-decoration: none;
   color: #ffffff;
 }
-.logoContainer_mb {
+.logoContainer_mb,
+.profileContainer_mb {
   display: none;
 }
 .logoImg {
@@ -114,7 +130,8 @@
     left: -250px;
   }
   .logoContainer,
-  .arrowContainer {
+  .arrowContainer,
+  .profileContainer {
     display: none;
   }
   .logoContainer_mb {
@@ -125,5 +142,8 @@
     margin-left: 10px;
     top: 10px;
     font-size: 24px;
+  }
+  .profileContainer_mb {
+    display: block;
   }
 }

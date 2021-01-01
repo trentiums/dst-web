@@ -44,7 +44,10 @@ function ForgotPassword() {
       }
     } catch (error) {
       NotificationManager.error(
-        error?.message || error.toString() || 'Server error. Please try again',
+        error?.message ||
+          error?.response?.data?.messsage ||
+          error.toString() ||
+          'Server error. Please try again',
       )
       setLoading(false)
       console.log('error :', error)

@@ -6,15 +6,9 @@ export const sidebarList = [
     iconSize: '20px',
   },
   {
-    text: 'Register',
-    path: '/register',
-    iconName: 'fa fa-user-plus',
-    iconSize: '16px',
-  },
-  {
-    text: 'Login',
+    text: 'Logout',
     path: '/login',
-    iconName: 'fa fa-sign-in',
+    iconName: 'fa fa-sign-out',
     iconSize: '20px',
   },
 ]

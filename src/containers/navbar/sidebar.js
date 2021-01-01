@@ -2,43 +2,54 @@ import React, { useState, memo } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleNavOption } from '../../redux/sidebar/actions'
-import { topbarList, sidebarList } from '../../data/routesList'
+import { sidebarList } from '../../data/routesList'
 import images from '../../assets/images'
-import './sidebar.css'
+import { userLogout } from '../../redux/user/actions'
 
 function Sidebar() {
   const [hoverIndex, setHoverIndex] = useState(-1)
   const dispatch = useDispatch()
-  const { navOption, uid } = useSelector((state) => ({
+  const { navOption, uid, user } = useSelector((state) => ({
     navOption: state.sidebar.navOption,
     uid: state.user.uid,
+    user: state.user,
   }))
   return (
-    <div className="header">
-      <a href="./" className="logoContainer">
-        <img src={images.logo} className="logoImg" height="40px" width="40px" alt=""></img>
-        Scrumpanion
-      </a>
-      {uid && (
-        <a onClick={() => dispatch(toggleNavOption(!navOption))} className="logoContainer_mb">
-          <img src={images.hamburgMenu} className="logoImg" height="30px" width="30px" alt=""></img>
-        </a>
-      )}
-      <div href="./" className="menuContainer">
-        {topbarList.map((link, index) => (
-          <Link key={`topbar-${index}-${link}`} className="menuItem" to={link.path}>
-            {link.text}
-          </Link>
-        ))}
-      </div>
+    <div>
       {uid && (
         <ul className={navOption ? 'active' : ''}>
+          {uid && user && (
+            <li
+              key={`sidebar-profile`}
+              className="profileContainer_mb"
+              onMouseEnter={() => setHoverIndex(1000)}
+              onMouseLeave={() => setHoverIndex(-1)}
+              style={{ background: hoverIndex === 1000 ? '#0286be' : '' }}
+            >
+              <Link to={'./register'}>
+                {user.nickName}
+                <img
+                  src={`http://localhost:8080${user.photoPath}`}
+                  className="logoImg"
+                  height="30px"
+                  width="30px"
+                  style={{ margin: 0, marginRight: -5 }}
+                  alt=""
+                ></img>
+              </Link>
+            </li>
+          )}
           {sidebarList.map((link, index) => (
             <li
               key={`sidebar-${index}-${link}`}
               onMouseEnter={() => setHoverIndex(index)}
               onMouseLeave={() => setHoverIndex(-1)}
               style={{ background: hoverIndex === index ? '#0286be' : '' }}
+              onClick={() => {
+                if (link.path === '/login') {
+                  dispatch(userLogout())
+                }
+              }}
             >
               <Link to={link.path}>
                 {link.text}

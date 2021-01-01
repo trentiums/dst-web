@@ -14,3 +14,7 @@ const app = firebase.initializeApp({
 export default app
 export const auth = app.auth()
 export const analytics = app.analytics()
+const googleProvider = new firebase.auth.GoogleAuthProvider()
+export const doSignInWithGoogle = () => auth.signInWithPopup(googleProvider)
+const facebookProvider = new firebase.auth.FacebookAuthProvider()
+export const doSignInWithFacebook = () => auth.signInWithPopup(facebookProvider)
