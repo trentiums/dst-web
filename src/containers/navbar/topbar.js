@@ -1,9 +1,10 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleNavOption } from '../../redux/sidebar/actions'
+import { toggleNavOption } from '../../redux/actions/sidebar/sidebarAction'
 import { topbarList } from '../../data/routesList'
 import images from '../../assets/images'
+import Api from '../../services/api'
 
 function Topbar() {
   const dispatch = useDispatch()
@@ -31,9 +32,9 @@ function Topbar() {
             </Link>
           ))
         ) : (
-          <Link to="./register" className="profileContainer">
+          <Link to="./profile" className="profileContainer">
             <img
-              src={`http://localhost:8080${user.photoPath}`}
+              src={`${Api.defaults.baseURL}${user.photoPath}`}
               className="logoImg"
               height="30px"
               width="30px"

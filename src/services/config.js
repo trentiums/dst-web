@@ -1,5 +1,11 @@
 export const backendEnvironments = [
   {
+    type: 'Local',
+    url: 'http://localhost:8080',
+    defaultEnvironment: true,
+    display: 'Local',
+  },
+  {
     type: 'TEST',
     url: 'https://test.dst.beskgroup.com',
     defaultEnvironment: true,

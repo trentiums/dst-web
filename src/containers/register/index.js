@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { NotificationManager } from 'react-notifications'
 import './register.css'
 import images from '../../assets/images'
-import { guestLogin } from '../../redux/user/actions'
+import { guestLogin } from '../../redux/actions/user/userAction'
 import { auth, doSignInWithGoogle, doSignInWithFacebook } from '../../services/firebase'
 import OrHorizontalBar from '../../components/orHorizontalBar'
 
@@ -185,7 +185,7 @@ function Register() {
             <img src={images.avatars[selectedAvatarIndex]} className="avatarImg" alt="" />
           </div>
           <div className="row">
-            <div className="col-md-6 input-container">
+            <div className="col-md-6">
               <input
                 id="firstName"
                 className={`form-control${registerDetails?.errors?.firstName ? ' is-invalid' : ''}`}
@@ -194,7 +194,7 @@ function Register() {
                 onChange={(e) => handleChange(e, 'firstName')}
               />
             </div>
-            <div className="col-md-6 input-container mt-3 mt-md-0">
+            <div className="col-md-6 mt-3 mt-md-0">
               <input
                 id="lastName"
                 className={`form-control${registerDetails?.errors?.lastName ? ' is-invalid' : ''}`}
@@ -205,7 +205,7 @@ function Register() {
             </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-6 input-container">
+            <div className="col-md-6">
               <input
                 id="name"
                 className={`form-control${registerDetails?.errors?.name ? ' is-invalid' : ''}`}
@@ -214,7 +214,7 @@ function Register() {
                 onChange={(e) => handleChange(e, 'name')}
               />
             </div>
-            <div className="col-md-6 input-container mt-3 mt-md-0">
+            <div className="col-md-6 mt-3 mt-md-0">
               <input
                 type="email"
                 id="email"
@@ -226,7 +226,7 @@ function Register() {
             </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-6 input-container">
+            <div className="col-md-6">
               <input
                 type="password"
                 id="password"
@@ -236,7 +236,7 @@ function Register() {
                 onChange={(e) => handleChange(e, 'password')}
               />
             </div>
-            <div className="col-md-6 input-container mt-3 mt-md-0">
+            <div className="col-md-6 mt-3 mt-md-0">
               <input
                 type="password"
                 id="confirmPass"

@@ -1,0 +1,139 @@
+.page_container {
+  display: flex;
+  min-height: calc(100vh - 50px);
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.button {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: #6dbd8e;
+  color: #ffffff;
+  padding: 0.4rem;
+}
+.button:active {
+  background-color: #7dce9f;
+}
+.buttonText {
+  display: flex;
+  color: #ffffff;
+}
+.layout-image {
+  display: flex;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.layout-item {
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0 !important;
+}
+.selected-layout {
+  border: 3px solid #6dbd8e;
+  border-radius: 10px;
+}
+.number {
+  position: absolute;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+}
+.num-top-left {
+  top: 15px;
+  left: 20px;
+}
+.num-bottom-left {
+  bottom: 15px;
+  left: 20px;
+}
+.num-top-right {
+  top: 15px;
+  right: 20px;
+}
+.num-bottom-right {
+  bottom: 15px;
+  right: 20px;
+}
+.check {
+  position: absolute;
+  border: 2px solid #ffffff;
+  right: -12px;
+  top: -12px;
+  background-color: #6dbd8e;
+  color: #000000;
+  border-radius: 50%;
+  height: fit-content;
+  width: fit-content;
+  padding: 2px 5px;
+}
+.check-number {
+  right: -10px;
+  top: -10px;
+  font-size: 14px;
+  padding: 3px 10px;
+  color: #000000 !important;
+}
+.check-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
+.center-check {
+  border: 1px solid #ffffff;
+  background-color: #6dbd8e;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 26px;
+  height: fit-content;
+  width: fit-content;
+  padding: 5px 13px;
+  align-self: center;
+}
+.cardset-image {
+  width: 130px;
+  border-radius: 10px;
+}
+.layout-con {
+  cursor: pointer;
+  border-radius: 10px;
+}
+.info-icon {
+  color: #ffffff;
+  position: absolute;
+  margin: 10px;
+  cursor: pointer;
+}
+.layout-container {
+  display: flex;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.res-num-container {
+  border-radius: 10px;
+  color: #ffffff;
+  padding: 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+.is-num-selected {
+  background-color: #954b79;
+}
+.is-num-non-selected {
+  background-color: #cccccc;
+}
+.userNameText {
+  color: #000000;
+  text-decoration: none;
+}
+.userNameText:hover {
+  text-decoration: none;
+}

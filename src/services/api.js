@@ -3,7 +3,7 @@ import { COOKIE_HEADER, CORRELATION_ID_HEADER, backendEnvironments } from './con
 import { generateCorrelationId } from './backendComHelper'
 
 const Api: AxiosInstance = axios.create({
-  baseURL: backendEnvironments[0].url,
+  baseURL: backendEnvironments.find((env) => env.defaultEnvironment === true)?.url,
   timeout: 20000,
   headers: {
     [COOKIE_HEADER]: 'UNDEFINED',
@@ -31,7 +31,7 @@ export const urls = {
   getCardSets: '/cardset',
   userPicbase: '/picturebase', // /user/{userUid}/picture - used only for update. For get please use photoPath/image from user object
   userDetails: '/user', // GET /user/{userUid}
-  updateUser: '/user/{0}', // PUT /user/{userUid}
+  updateUser: '/user', // PUT /user/{userUid}
   layoutCardsList: '/cardsetinfo/{0}', // GET /cardsetinfo/{layout} i.e. cardsetinfo/DELEGATION_POKER_DEFAULT
   activeLayouts: '/estimationlayouts/{0}', // GET /estimationlayouts/{userUid}
   refreshPayment: '/payment/refresh',

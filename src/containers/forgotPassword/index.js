@@ -70,7 +70,7 @@ function ForgotPassword() {
             <img src={images.logo} className="logoImage" alt="" />
           </div>
           <h5 className="text-center">Forgot your password?</h5>
-          <div className="col-md-12 input-container px-0">
+          <div className="col-md-12 px-0">
             <input
               type="email"
               id="email"
