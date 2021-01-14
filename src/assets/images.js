@@ -4,6 +4,7 @@ import hamburgMenu from './images/menu.svg'
 import loader from './images/loader.svg'
 import back from './images/back.svg'
 import close from './images/close.svg'
+import inviteTeamMember from './images/icons/invite-teammembers-icon.png'
 import avatar1 from './images/avatars/avatar-01.png'
 import avatar2 from './images/avatars/avatar-02.png'
 import avatar3 from './images/avatars/avatar-03.png'
@@ -34,6 +35,7 @@ const images = {
   loader,
   back,
   close,
+  inviteTeamMember,
   avatars: [
     avatar1,
     avatar2,

@@ -2,11 +2,10 @@ import React, { memo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import { useDispatch } from 'react-redux'
-import './login.css'
-import images from '../../assets/images'
-import { auth, doSignInWithGoogle, doSignInWithFacebook } from '../../services/firebase'
-import OrHorizontalBar from '../../components/orHorizontalBar'
-import { guestLogin } from '../../redux/actions/user/userAction'
+import images from '../assets/images'
+import { auth, doSignInWithGoogle, doSignInWithFacebook } from '../services/firebase'
+import OrHorizontalBar from '../components/orHorizontalBar'
+import { guestLogin } from '../redux/actions/user/userAction'
 
 function Login() {
   const initialState = {

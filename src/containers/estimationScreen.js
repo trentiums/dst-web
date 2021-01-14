@@ -1,12 +1,11 @@
 import React, { memo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
-import images, { cards } from '../../assets/images'
-import { showMessageCloseEstimation } from '../../services/hintText'
-import HeaderBtn from '../../components/headerBtn'
-import InfoModal from '../../components/commonModals/infoModal'
-import IssueNameModal from '../../components/commonModals/issueNameModal'
-import './estimationScreen.css'
+import images, { cards } from '../assets/images'
+import { showMessageCloseEstimation } from '../services/hintText'
+import HeaderBtn from '../components/headerBtn'
+import InfoModal from '../components/commonModals/infoModal'
+import IssueNameModal from '../components/commonModals/issueNameModal'
 
 function EstimationScreen() {
   const [loading, setLoading] = useState(false)
@@ -67,10 +66,7 @@ function EstimationScreen() {
         />
         <div className="header-title">
           Teamspace Name
-          <span
-            style={{ color: '#0286be', cursor: 'pointer' }}
-            onClick={() => setChangeIssueName(true)}
-          >
+          <span className="primary_color pointer" onClick={() => setChangeIssueName(true)}>
             {' '}
             | <i className="fa fa-group mr-2" style={{ fontSize: 16 }} />
             IssueName

@@ -1,10 +1,9 @@
 import React, { memo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
-import images, { cards } from '../../assets/images'
-import { teammates } from '../../data/routesList'
-import UserItem from '../../components/userItem'
-import './issueScreen.css'
+import images, { cards } from '../assets/images'
+import { teammates } from '../data/routesList'
+import UserItem from '../components/userItem'
 
 function IssueScreen() {
   const [issueName, setIssueName] = useState(null)
@@ -41,7 +40,7 @@ function IssueScreen() {
         <form className="form-signin " onSubmit={handleSubmit}>
           <div className="avatarContainer mb-3">
             {teammates.map((item, i) => (
-              <UserItem index={i} key={`user-${i}`} user={item} />
+              <UserItem index={i} user={item} />
             ))}
           </div>
           <div className="row m-2 ml-3 mr-3">

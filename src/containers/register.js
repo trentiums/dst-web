@@ -2,11 +2,10 @@ import React, { memo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { NotificationManager } from 'react-notifications'
-import './register.css'
-import images from '../../assets/images'
-import { guestLogin } from '../../redux/actions/user/userAction'
-import { auth, doSignInWithGoogle, doSignInWithFacebook } from '../../services/firebase'
-import OrHorizontalBar from '../../components/orHorizontalBar'
+import images from '../assets/images'
+import { guestLogin } from '../redux/actions/user/userAction'
+import { auth, doSignInWithGoogle, doSignInWithFacebook } from '../services/firebase'
+import OrHorizontalBar from '../components/orHorizontalBar'
 
 function Register() {
   const initialState = {

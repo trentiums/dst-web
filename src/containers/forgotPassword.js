@@ -1,9 +1,8 @@
 import React, { memo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
-import './forgotPassword.css'
-import images from '../../assets/images'
-import { auth } from '../../services/firebase'
+import images from '../assets/images'
+import { auth } from '../services/firebase'
 
 function ForgotPassword() {
   const initialState = {

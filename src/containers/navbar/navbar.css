@@ -44,6 +44,10 @@
 .header ul li.active {
   background: #999999;
 }
+.header ul li img {
+  margin-right: 5px;
+  font-size: 20px;
+}
 .header ul a {
   color: #ffffff;
   text-decoration: none;
@@ -83,10 +87,6 @@
   font-size: 20px;
   padding: 8px 15px !important;
   border-left: 1px solid #999;
-}
-.header ul li img {
-  margin-right: 5px;
-  font-size: 20px;
 }
 .borderItem {
   border: 1px solid #999;
@@ -149,7 +149,7 @@
 }
 .logoContainer_mb,
 .profileContainer_mb {
-  display: none;
+  display: none !important;
 }
 .logoImg {
   margin-right: 5px;
@@ -166,7 +166,6 @@
   bottom: 5px;
   transform: rotate(180deg);
 }
-
 @media only screen and (max-width: 767px) {
   .header ul {
     left: -250px;
@@ -177,7 +176,7 @@
     display: none;
   }
   .logoContainer_mb {
-    display: flex;
+    display: flex !important;
     align-items: center;
     cursor: pointer;
     position: fixed;
@@ -186,6 +185,6 @@
     font-size: 24px;
   }
   .profileContainer_mb {
-    display: block;
+    display: block !important;
   }
 }

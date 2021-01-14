@@ -3,11 +3,11 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import './style.css'
 
-const Home = lazy(() => import('./containers/home/'))
-const Register = lazy(() => import('./containers/register/'))
-const Login = lazy(() => import('./containers/login/'))
-const ForgotPassword = lazy(() => import('./containers/forgotPassword/'))
-const Profile = lazy(() => import('./containers/profile/'))
+const Home = lazy(() => import('./containers/home'))
+const Register = lazy(() => import('./containers/register'))
+const Login = lazy(() => import('./containers/login'))
+const ForgotPassword = lazy(() => import('./containers/forgotPassword'))
+const Profile = lazy(() => import('./containers/profile'))
 const IssueScreen = lazy(() => import('./containers/issueScreen'))
 const LayoutScreen = lazy(() => import('./containers/layoutScreen'))
 const EstimationScreen = lazy(() => import('./containers/estimationScreen'))

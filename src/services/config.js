@@ -8,7 +8,7 @@ export const backendEnvironments = [
   {
     type: 'TEST',
     url: 'https://test.dst.beskgroup.com',
-    defaultEnvironment: true,
+    defaultEnvironment: false,
     display: 'TEST',
   },
   {

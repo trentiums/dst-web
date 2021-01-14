@@ -14,12 +14,8 @@ function IssueNameModal({ isShow, setShow }) {
               <div className="col-md-12">
                 <input
                   id="name"
-                  className={`form-control${
-                    // registerDetails?.errors?.firstName ? ' is-invalid' : ''
-                    ''
-                  }`}
+                  className={`form-control `}
                   placeholder="Issue Name"
-                  // value={registerDetails?.fields?.firstName || ''}
                   onChange={(e) => {}}
                 />
               </div>

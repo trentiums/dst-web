@@ -1,10 +1,9 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NotificationManager } from 'react-notifications'
-import './profile.css'
-import images from '../../assets/images'
-import { updateUserPicture, updateUserInfo } from '../../redux/actions/user/userAction'
-import Api from '../../services/api'
+import images from '../assets/images'
+import { updateUserPicture, updateUserInfo } from '../redux/actions/user/userAction'
+import Api from '../services/api'
 
 function Profile() {
   const initialState = {

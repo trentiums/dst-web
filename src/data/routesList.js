@@ -1,10 +1,14 @@
+import Api from '../services/api'
+import images from '../assets/images'
 export const teammates = [
   {
     teamSpaceName: 'Invite',
+    nickName: 'Share',
+    image: images.inviteTeamMember,
   },
   {
     connectionState: 'ONLINE',
-    image: 'http://localhost:8080/user/497f362f/picture?random=1',
+    image: `${Api.defaults.baseURL}/user/497f362f/picture?random=1`,
     licenseType: 'FREE',
     me: true,
     nickName: 'Test',
@@ -13,7 +17,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -22,7 +26,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -31,7 +35,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -40,7 +44,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -49,7 +53,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -58,7 +62,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -67,7 +71,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -76,7 +80,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -85,7 +89,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -94,7 +98,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -103,7 +107,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -112,7 +116,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -121,7 +125,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -130,7 +134,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -139,7 +143,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,
@@ -148,7 +152,7 @@ export const teammates = [
   },
   {
     connectionState: 'NONE',
-    image: 'http://localhost:8080/user/NONE/picture?random=null',
+    image: `${Api.defaults.baseURL}/user/NONE/picture?random=null`,
     licenseType: 'FREE',
     me: false,
     nickName: null,

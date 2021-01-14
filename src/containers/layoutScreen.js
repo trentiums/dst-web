@@ -1,9 +1,8 @@
 import React, { memo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import HeaderBtn from '../../components/headerBtn'
+import HeaderBtn from '../components/headerBtn'
 import { NotificationManager } from 'react-notifications'
-import images, { cards } from '../../assets/images'
-import './layoutScreen.css'
+import images, { cards } from '../assets/images'
 
 function LayoutScreen() {
   const [loading, setLoading] = useState(false)

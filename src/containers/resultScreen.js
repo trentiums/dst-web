@@ -2,16 +2,15 @@ import React, { memo, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import { useSelector } from 'react-redux'
-import images from '../../assets/images'
-import Api from '../../services/api'
-import { showMessageCloseEstimation } from '../../services/hintText'
-import HeaderBtn from '../../components/headerBtn'
-import InfoModal from '../../components/commonModals/infoModal'
-import IssueNameModal from '../../components/commonModals/issueNameModal'
-import ResultModal from '../../components/commonModals/resultModal'
-import HorizontalCardList from '../../components/horizontalCardList'
-import CustomPieChart from '../../components/customPieChart'
-import './resultScreen.css'
+import images from '../assets/images'
+import Api from '../services/api'
+import { showMessageCloseEstimation } from '../services/hintText'
+import HeaderBtn from '../components/headerBtn'
+import InfoModal from '../components/commonModals/infoModal'
+import IssueNameModal from '../components/commonModals/issueNameModal'
+import ResultModal from '../components/commonModals/resultModal'
+import HorizontalCardList from '../components/horizontalCardList'
+import CustomPieChart from '../components/customPieChart'
 
 function ResultScreen() {
   const initialData = [
@@ -92,8 +91,8 @@ function ResultScreen() {
           <CustomPieChart
             data={data}
             onClick={(e, selectedIndex) => {
-              setSelectedSegment(selectedIndex)
-              if (selectedIndex === selectedSegment) {
+              setSelectedSegment(selectedIndex + 1)
+              if (selectedIndex + 1 === selectedSegment) {
                 setData(initialData)
                 setSelectedSegment(null)
               } else {
