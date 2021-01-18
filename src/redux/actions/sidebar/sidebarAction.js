@@ -1,4 +1,4 @@
-import types from './types'
+import types from './sidebarTypes'
 
 export const toggleNavOption = (navOption) => async (dispatch) => {
   dispatch({

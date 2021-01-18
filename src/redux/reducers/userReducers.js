@@ -1,4 +1,4 @@
-import types from './types'
+import * as userTypes from '../actions/user/userTypes'
 
 const initialState = {
   validUser: undefined,
@@ -12,7 +12,7 @@ export default function userReducer(state = initialState, action) {
   let userDeviceData
   let userData
   switch (action.type) {
-    case types.USER_LOGIN_SUCCESS:
+    case userTypes.USER_LOGIN_SUCCESS:
       userDeviceData = action.payload
       state = {
         ...state,
@@ -28,7 +28,7 @@ export default function userReducer(state = initialState, action) {
       }
 
       return state
-    case types.USER_UPDATE_SUCCESS:
+    case userTypes.USER_UPDATE_SUCCESS:
       userData = action.payload
       state = {
         ...state,
@@ -38,33 +38,33 @@ export default function userReducer(state = initialState, action) {
         password: userData.username,
       }
       return state
-    case types.USER_LOGIN_AUTH_ERROR:
+    case userTypes.USER_LOGIN_AUTH_ERROR:
       alert('Authentication failed')
       return action.payload
-    case types.LICENSE_UPDATED:
+    case userTypes.LICENSE_UPDATED:
       state = {
         ...state,
       }
       return state
-    case types.REFRESH_USER:
+    case userTypes.REFRESH_USER:
       state = {
         ...state,
         nickname: action.payload.nickName,
         username: action.payload.updatedUserData.userName,
       }
       return state
-    case types.USER_TYPE:
+    case userTypes.USER_TYPE:
       state = {
         ...state,
         layoutFor: action.payload.layoutFor,
       }
       return state
-    case types.RESET_LAYOUT:
+    case userTypes.RESET_LAYOUT:
       return {
         ...state,
         layoutFor: 'OWNER',
       }
-    case types.USER_LOGOUT:
+    case userTypes.USER_LOGOUT:
       return {
         ...initialState,
       }

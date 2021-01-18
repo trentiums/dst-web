@@ -2,11 +2,10 @@ import React, { memo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import { useDispatch } from 'react-redux'
-import './login.css'
-import images from '../../assets/images'
-import { auth, doSignInWithGoogle, doSignInWithFacebook } from '../../services/firebase'
-import OrHorizontalBar from '../../components/orHorizontalBar'
-import { guestLogin } from '../../redux/user/actions'
+import images from '../assets/images'
+import { auth, doSignInWithGoogle, doSignInWithFacebook } from '../services/firebase'
+import OrHorizontalBar from '../components/orHorizontalBar'
+import { guestLogin } from '../redux/actions/user/userAction'
 
 function Login() {
   const initialState = {
@@ -139,7 +138,7 @@ function Login() {
           <div className="imgContainer">
             <img src={images.logo} className="logoImage" alt="" />
           </div>
-          <div className="col-md-12 input-container mt-3 px-0">
+          <div className="col-md-12 mt-3 px-0">
             <input
               type="email"
               id="email"
@@ -149,7 +148,7 @@ function Login() {
               onChange={(e) => handleChange(e, 'email')}
             />
           </div>
-          <div className="col-md-12 input-container mt-3 px-0">
+          <div className="col-md-12 mt-3 px-0">
             <input
               type="password"
               id="password"

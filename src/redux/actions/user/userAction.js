@@ -1,26 +1,35 @@
-import types from './types'
-import Api, { urls, setCookie, setAuthorization } from '../../services/api'
-import { auth } from '../../services/firebase'
-
+import * as userTypes from './userTypes'
+import Api, { urls, setCookie, setAuthorization } from '../../../services/api'
+import { auth } from '../../../services/firebase'
 export const userUpdateSuccess = (response) => {
   return {
-    type: types.USER_UPDATE_SUCCESS,
+    type: userTypes.USER_UPDATE_SUCCESS,
     payload: response,
   }
 }
-export const getUserProfile = (params) => async (dispatch, getState) => {
+export const updateUserInfo = (user) => async (dispatch, getState) => {
   try {
-    const response = await Api.get(`${urls.userDetails}/${params.userId}`)
+    const { uid } = getState().user
+    const response = await Api.put(`${urls.updateUser}/${uid}`, user)
     dispatch(
       userUpdateSuccess({
+        ...getState().user,
         ...response.data,
-        deviceId: params.deviceId,
       }),
     )
-    console.log(response)
   } catch (e) {
     console.log(e)
     return Promise.reject(e)
+  }
+}
+export const updateUserPicture = (picture) => async (dispatch, getState) => {
+  try {
+    const { uid } = getState().user
+    const response = await Api.put(`user/${uid}${urls.userPicbase}`, { picture })
+    console.log(response)
+  } catch (e) {
+    console.log(e)
+    return Promise.reject()
   }
 }
 export const guestLogin = (params) => async (dispatch) => {
@@ -64,6 +73,36 @@ export const guestLogin = (params) => async (dispatch) => {
 export const userLogout = () => async (dispatch) => {
   await auth.signOut()
   dispatch({
-    type: types.USER_LOGOUT,
+    type: userTypes.USER_LOGOUT,
   })
+}
+
+export const setApiCredentials = (username, password) => () => {
+  setAuthorization({ username, password })
+}
+
+export const userLoginSuccess = (response) => {
+  return {
+    type: userTypes.USER_LOGIN_SUCCESS,
+    payload: response,
+  }
+}
+
+export const getUserProfile = () => async (dispatch, getState) => {
+  try {
+    if (!getState().user.uid) {
+      const user = {}
+      return Promise.resolve(user)
+    }
+    const { data: user } = await Api.get(urls.userDetails.format(getState().user.uid))
+    return Promise.resolve(user)
+  } catch (e) {
+    if (typeof e !== 'undefined') {
+      // showMessage({
+      //   type: Config.INFORMATION_LEVEL['ERROR'],
+      //   text: 'Server error. Could not modify user data',
+      // })
+      console.log(e)
+    }
+  }
 }

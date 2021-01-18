@@ -10,31 +10,324 @@
 .main_container.user_not_found {
   margin-left: 0px;
 }
-@media only screen and (max-width: 767px) {
-  .main_container {
-    margin-left: 0px;
-  }
-  .main_container.active {
-    margin-left: 0px;
-  }
-}
 .swiper-button-prev,
 .swiper-button-next {
   color: #0286be !important;
 }
-
 .box {
   width: 33rem;
 }
-
+.header-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+.header-title {
+  line-height: 1.5;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.page_container {
+  display: flex;
+  min-height: calc(100vh - 90px);
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.box {
+  margin: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 0px;
+  height: fit-content;
+  border-radius: 10px;
+  box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.1);
+  padding: 20px;
+  background-color: #ffffff;
+}
+.box-container {
+  box-shadow: none;
+}
+.imgContainer {
+  display: flex;
+  justify-content: center;
+}
+.button {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: #6dbd8e;
+  color: #ffffff;
+  padding: 0.4rem;
+}
+.button:active {
+  background-color: #7dce9f;
+}
+.buttonText {
+  display: flex;
+  color: #ffffff;
+}
+.logoImage {
+  height: 8rem;
+  width: 8rem;
+}
+.avatarImg {
+  margin: 5px;
+  height: 20%;
+  width: 20%;
+  max-height: 70px;
+  max-width: 70px;
+  cursor: pointer;
+}
+.fgPass {
+  font-weight: normal !important;
+  text-align: right;
+}
+.navLink {
+  cursor: pointer;
+  color: #0286be;
+  font-weight: 500;
+}
+.navLink:hover {
+  color: rgba(2, 134, 190, 0.7);
+}
+.fbBtn {
+  padding: 0.5rem;
+  color: #ffffff;
+  background-color: #3b5999 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+.appleBtn {
+  padding: 0.5rem;
+  color: #ffffff;
+  background-color: #000000 !important;
+  border-radius: 0 !important;
+}
+.googleBtn {
+  padding: 0.5rem;
+  color: #ffffff;
+  background-color: #d54837 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+.layout-image {
+  display: flex;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.layout-item {
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0 !important;
+}
+.selected-layout {
+  border: 2px solid #6dbd8e;
+  border-radius: 10px;
+}
+.number {
+  position: absolute;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+}
+.num-top-left {
+  top: 15px;
+  left: 20px;
+}
+.num-bottom-left {
+  bottom: 15px;
+  left: 20px;
+}
+.num-top-right {
+  top: 15px;
+  right: 20px;
+}
+.num-bottom-right {
+  bottom: 15px;
+  right: 20px;
+}
+.check {
+  position: absolute;
+  border: 2px solid #ffffff;
+  right: -12px;
+  top: -12px;
+  background-color: #6dbd8e;
+  color: #ffffff;
+  border-radius: 50%;
+  height: fit-content;
+  width: fit-content;
+  padding: 2px 5px;
+}
+.check-number {
+  right: -10px;
+  top: -10px;
+  font-size: 14px;
+  padding: 3px 10px;
+}
+.check-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
+.center-check {
+  border: 1px solid #ffffff;
+  background-color: #6dbd8e;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 26px;
+  height: fit-content;
+  width: fit-content;
+  padding: 5px 13px;
+  align-self: center;
+}
+.home_container {
+  display: flex;
+  min-height: calc(100vh - 90px);
+  width: 100%;
+}
+.cardset-image {
+  width: 122px;
+  border-radius: 10px;
+}
+.layout-con {
+  cursor: pointer;
+  border-radius: 10px;
+}
+.info-icon {
+  color: #ffffff;
+  position: absolute;
+  margin: 10px;
+  cursor: pointer;
+}
+.layout-container {
+  display: flex;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.res-num-container {
+  border-radius: 10px;
+  color: #ffffff;
+  padding: 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+.is-num-selected {
+  background-color: #954b79;
+}
+.is-num-non-selected {
+  background-color: #cccccc;
+}
+.userNameText {
+  color: #000000;
+  text-decoration: none;
+}
+.userNameText:hover {
+  text-decoration: none;
+}
+.check-ring {
+  position: absolute;
+  border: 1px solid #6dbd8e;
+  right: 10px;
+  top: 5px;
+  background-color: #ffffff;
+  color: #6dbd8e;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  padding: 2px 5px;
+}
+.check-ring-icon {
+  height: fit-content !important;
+  width: fit-content !important;
+}
+.gradient-container {
+  position: absolute;
+  background: linear-gradient(-180deg, transparent 50%, rgba(0, 0, 0, 0.5));
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  bottom: 0px;
+  color: #ffffff;
+  font-size: 20px;
+}
+.gradient-text {
+  position: absolute;
+  bottom: 0px;
+  padding: 7px 15px;
+}
+.avatarContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-height: 180px;
+  overflow-y: scroll;
+}
+.avatarImgInnerCon {
+  margin: 5px;
+  width: 20%;
+  max-height: 70px;
+  max-width: 70px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+}
+.selected-layout-con {
+  cursor: pointer;
+  border: 2px solid #6dbd8e;
+  border-radius: 10px;
+}
+.vote-sm-container {
+  color: #6c757d;
+  font-size: 12px;
+  float: right;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.pointer {
+  cursor: pointer;
+}
+.primary_color {
+  color: #0286be;
+}
 @media only screen and (max-width: 1022px) {
   .box {
     max-width: 33rem;
   }
 }
 @media only screen and (max-width: 767px) {
+  .fbBtn,
+  .appleBtn,
+  .googleBtn {
+    border-radius: 5px !important;
+    margin-top: 5px;
+  }
   .box {
     max-width: 33rem;
+  }
+  .main_container {
+    margin-left: 0px;
+  }
+  .main_container.active {
+    margin-left: 0px;
+  }
+  .header-title {
+    line-height: 1;
+    font-size: 1rem;
+    font-weight: 500;
   }
 }
 @media only screen and (max-width: 540px) {
@@ -45,6 +338,11 @@
 @media only screen and (max-width: 480px) {
   .box {
     max-width: 20rem;
+  }
+  .header-title {
+    line-height: 0.5;
+    font-size: 0.7rem;
+    font-weight: 500;
   }
 }
 @media only screen and (max-width: 320px) {

@@ -31,27 +31,67 @@
   transform: rotate(180deg);
 }
 .header ul li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   list-style-type: none;
   margin: 0px;
   padding: 0px;
+  cursor: pointer;
 }
 .header ul li.active {
   background: #999999;
+}
+.header ul li img {
+  margin-right: 5px;
+  font-size: 20px;
 }
 .header ul a {
   color: #ffffff;
   text-decoration: none;
   display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
+  flex: 1;
   flex-direction: row;
-  justify-content: space-between;
-  padding: 10px 15px;
 }
-.header ul li img {
-  margin-right: 5px;
+.sideBarItemText {
+  display: flex;
+  flex: 1;
+  padding: 6px;
+  padding-left: 15px;
+}
+.sideBarItemIconA {
+  flex: 0 !important;
+}
+.sideBarItemArrowIcon {
+  font-size: 18px;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+.sideBarItemIcon {
+  color: #ffffff;
   font-size: 20px;
+  padding: 8px 15px !important;
+}
+.sideBarItemIconSpcl {
+  flex: 0;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 8px 15px !important;
+  border-left: 1px solid #999;
+}
+.sideBarItemIconSpcl:hover {
+  color: #0286be;
+  background-color: #000000;
+  font-size: 20px;
+  padding: 8px 15px !important;
+  border-left: 1px solid #999;
+}
+.borderItem {
+  border: 1px solid #999;
+  border-left: 0px;
+  border-right: 0px;
 }
 .logoContainer {
   text-decoration: none;
@@ -109,10 +149,12 @@
 }
 .logoContainer_mb,
 .profileContainer_mb {
-  display: none;
+  display: none !important;
 }
 .logoImg {
   margin-right: 5px;
+  margin-top: 3;
+  margin-right: 10;
 }
 .arrowContainer {
   display: flex;
@@ -124,7 +166,6 @@
   bottom: 5px;
   transform: rotate(180deg);
 }
-
 @media only screen and (max-width: 767px) {
   .header ul {
     left: -250px;
@@ -135,7 +176,7 @@
     display: none;
   }
   .logoContainer_mb {
-    display: flex;
+    display: flex !important;
     align-items: center;
     cursor: pointer;
     position: fixed;
@@ -144,6 +185,6 @@
     font-size: 24px;
   }
   .profileContainer_mb {
-    display: block;
+    display: block !important;
   }
 }
