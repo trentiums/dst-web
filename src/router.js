@@ -12,6 +12,7 @@ const IssueScreen = lazy(() => import('./containers/issueScreen'))
 const LayoutScreen = lazy(() => import('./containers/layoutScreen'))
 const EstimationScreen = lazy(() => import('./containers/estimationScreen'))
 const ResultScreen = lazy(() => import('./containers/resultScreen'))
+const ErrorPage = lazy(() => import('./containers/errorPage'))
 
 function Router() {
   const { navOption, uid } = useSelector((state) => ({
@@ -23,14 +24,15 @@ function Router() {
       <Switch>
         <Redirect from="//*" to="/*" />
         <Route exact path="/" component={Home} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/forgotPass" component={ForgotPassword} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/issueScreen" component={IssueScreen} />
-        <Route exact path="/layoutScreen" component={LayoutScreen} />
-        <Route exact path="/estimationScreen" component={EstimationScreen} />
-        <Route exact path="/resultScreen" component={ResultScreen} />
+        {!uid && <Route exact path="/register" component={Register} />}
+        {!uid && <Route exact path="/login" component={Login} />}
+        {!uid && <Route exact path="/forgotPass" component={ForgotPassword} />}
+        {uid && <Route exact path="/profile" component={Profile} />}
+        {uid && <Route exact path="/issueScreen" component={IssueScreen} />}
+        {uid && <Route exact path="/layoutScreen" component={LayoutScreen} />}
+        {uid && <Route exact path="/estimationScreen" component={EstimationScreen} />}
+        {uid && <Route exact path="/resultScreen" component={ResultScreen} />}
+        <Route component={ErrorPage} />
       </Switch>
     </div>
   )

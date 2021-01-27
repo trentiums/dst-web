@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toggleNavOption } from '../../redux/actions/sidebar/sidebarAction'
 import { topbarList } from '../../data/routesList'
 import images from '../../assets/images'
-import Api from '../../services/api'
 
-function Topbar() {
+function Topbar({ profileURL }) {
   const dispatch = useDispatch()
   const { navOption, uid, user } = useSelector((state) => ({
     navOption: state.sidebar.navOption,
@@ -33,13 +32,7 @@ function Topbar() {
           ))
         ) : (
           <Link to="./profile" className="profileContainer">
-            <img
-              src={`${Api.defaults.baseURL}${user.photoPath}`}
-              className="logoImg"
-              height="30px"
-              width="30px"
-              alt=""
-            ></img>
+            <img src={profileURL} className="barAvatarImg" height="30px" width="30px" alt=""></img>
             {user.nickName}
           </Link>
         )}

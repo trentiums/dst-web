@@ -1,4 +1,6 @@
 export const keys = {
+  deviceId: 'deviceId',
+  firebaseUid: 'firebaseUid',
   tourCurrentStep: 'tour_current_step',
   cookie: 'cookie',
   getStarted: 'get_started',

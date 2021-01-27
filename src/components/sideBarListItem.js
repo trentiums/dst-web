@@ -28,7 +28,9 @@ function SideBarListItem({
           {text}
           {arrowIcon && <i className={`${arrowIcon} sideBarItemArrowIcon `} />}
         </div>
-        {imgSrc && <img src={imgSrc} className="logoImg" height="30px" width="30px" alt=""></img>}
+        {imgSrc && (
+          <img src={imgSrc} className="barAvatarImg" height="30px" width="30px" alt=""></img>
+        )}
       </Link>
       {iconName && (
         <Link

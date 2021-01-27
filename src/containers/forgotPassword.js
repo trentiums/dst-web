@@ -1,8 +1,9 @@
 import React, { memo, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import images from '../assets/images'
 import { auth } from '../services/firebase'
+import { getContinueURL } from '../services/api'
 
 function ForgotPassword() {
   const initialState = {
@@ -12,6 +13,7 @@ function ForgotPassword() {
   const [fPDetails, setFPDetails] = useState(initialState)
   const [loading, setLoading] = useState(false)
   const history = useHistory()
+  const location = useLocation()
 
   const handleValidation = () => {
     let fields = fPDetails.fields
@@ -36,7 +38,9 @@ function ForgotPassword() {
       setLoading(true)
       e.preventDefault()
       if (handleValidation()) {
-        await auth.sendPasswordResetEmail(fPDetails.fields.email)
+        await auth.sendPasswordResetEmail(fPDetails.fields.email, {
+          url: getContinueURL(location.search),
+        })
         NotificationManager.success('Check your mail for reset password.')
       } else {
         return
@@ -85,7 +89,15 @@ function ForgotPassword() {
         </form>
       </div>
       <div className="mt-2 mb-5">
-        <span className="navLink mt-2 mb-5" onClick={() => history.push('login')}>
+        <span
+          className="navLink mt-2 mb-5"
+          onClick={() =>
+            history.push({
+              pathname: 'login',
+              search: location.search,
+            })
+          }
+        >
           Cancel
         </span>
       </div>

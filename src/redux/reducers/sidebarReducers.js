@@ -1,4 +1,4 @@
-import types from '../actions/sidebar/sidebarTypes'
+import * as sidebarTypes from '../actions/sidebar/sidebarTypes'
 
 const initialState = {
   navOption: false,
@@ -6,7 +6,7 @@ const initialState = {
 
 export default function sidebarReducer(state = initialState, action) {
   switch (action.type) {
-    case types.TOGGLE_NAV_OPTION:
+    case sidebarTypes.TOGGLE_NAV_OPTION:
       return { ...state, navOption: action.payload }
     default:
       return state

@@ -1,14 +1,14 @@
 export const backendEnvironments = [
   {
-    type: 'Local',
+    type: 'LOCAL',
     url: 'http://localhost:8080',
-    defaultEnvironment: true,
-    display: 'Local',
+    defaultEnvironment: false,
+    display: 'LOCAL',
   },
   {
     type: 'TEST',
     url: 'https://test.dst.beskgroup.com',
-    defaultEnvironment: false,
+    defaultEnvironment: true,
     display: 'TEST',
   },
   {
@@ -22,9 +22,18 @@ export const backendEnvironments = [
     //insert your local ip address
     url: 'http://',
     defaultEnvironment: false,
-    display: 'LOCAL',
+    display: 'UNIT_TEST',
   },
 ]
+
+export const getCurrentEnv = () => {
+  const { REACT_APP_DST_ENVIRONMENT } = process.env
+  if (REACT_APP_DST_ENVIRONMENT) {
+    return backendEnvironments.find((env) => env.type === REACT_APP_DST_ENVIRONMENT)?.url
+  } else {
+    return backendEnvironments.find((env) => env.defaultEnvironment === true)?.url
+  }
+}
 
 export const CORRELATION_ID_HEADER = 'x-dst-correlationId'
 export const COOKIE_HEADER = 'x-dst-cookie'
