@@ -6,7 +6,7 @@ import { teammates } from '../data/routesList'
 import UserItem from '../components/userItem'
 
 function IssueScreen() {
-  const [issueName, setIssueName] = useState(null)
+  const [issueName, setIssueName] = useState('')
   const [loading, setLoading] = useState(false)
   const [selectedLayoutIndex, setSelectedLayoutIndex] = useState(1)
   const [wantsToVote, setWantsToVote] = useState(true)
@@ -63,9 +63,9 @@ function IssueScreen() {
               <i className="fa fa-history ml-2" style={{ fontSize: 25, color: '#0286be' }}></i>
             </button>
           </div>
-          <div className="layout-container mb-3" scroll>
+          <div className="layout-container mb-3">
             {[1, 2, 3, 4, 5].map((card, index) => (
-              <div onClick={() => setSelectedLayoutIndex(index + 1)}>
+              <div onClick={() => setSelectedLayoutIndex(index + 1)} key={`layouts-${index}`}>
                 <i className="fa fa-info-circle info-icon" />
                 <img
                   src={cards.cardset.planningPokerBavarianCard}

@@ -1,4 +1,5 @@
 export const keys = {
+  firebaseUid: 'firebaseUid',
   tourCurrentStep: 'tour_current_step',
   cookie: 'cookie',
   getStarted: 'get_started',
@@ -6,6 +7,9 @@ export const keys = {
   lastLicenseExpireCheckDate: 'license_expire_check_date',
   backendUrl: 'backendUrl',
   wantsToVote: 'wantsToVote',
+}
+export const sessionkeys = {
+  deviceId: 'deviceId',
 }
 
 export const tourSteps = { step1: 1, step2: 2, step3: 3 }

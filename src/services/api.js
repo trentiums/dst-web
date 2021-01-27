@@ -1,9 +1,9 @@
 import axios, { AxiosInstance } from 'axios'
-import { COOKIE_HEADER, CORRELATION_ID_HEADER, backendEnvironments } from './config'
+import { COOKIE_HEADER, CORRELATION_ID_HEADER, getCurrentEnv } from './config'
 import { generateCorrelationId } from './backendComHelper'
 
 const Api: AxiosInstance = axios.create({
-  baseURL: backendEnvironments.find((env) => env.defaultEnvironment === true)?.url,
+  baseURL: getCurrentEnv(),
   timeout: 20000,
   headers: {
     [COOKIE_HEADER]: 'UNDEFINED',
@@ -59,6 +59,12 @@ export const createCorrelationInterceptor = () => {
     }
     return config
   })
+}
+
+export const URL = 'http://localhost:3000'
+
+export const getContinueURL = (url) => {
+  return URL + '/login' + url
 }
 
 export const setAuthorization = ({ username, password }) => {

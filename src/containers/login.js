@@ -1,11 +1,14 @@
 import React, { memo, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import { useDispatch } from 'react-redux'
 import images from '../assets/images'
-import { auth, doSignInWithGoogle, doSignInWithFacebook } from '../services/firebase'
+import { auth } from '../services/firebase'
 import OrHorizontalBar from '../components/orHorizontalBar'
 import { guestLogin } from '../redux/actions/user/userAction'
+import SocialLogin from '../components/socialLogin'
+import { getContinueURL } from '../services/api'
+// import { sessionkeys } from '../services/localStorage'
 
 function Login() {
   const initialState = {
@@ -16,6 +19,7 @@ function Login() {
   const [loading, setLoading] = useState(false)
   const history = useHistory()
   const dispatch = useDispatch()
+  const location = useLocation()
 
   const handleValidation = () => {
     let fields = loginDetails.fields
@@ -39,14 +43,40 @@ function Login() {
     }
     return Object.keys(errors).length > 0 ? false : true
   }
-  const onSuccessLogin = async () => {
+
+  const onLogin = async (params) => {
     try {
+      if (location.search) {
+        const query = new URLSearchParams(location.search)
+        const teamSpaceId = query.get('teamSpaceId')
+        if (teamSpaceId) {
+          params.startParameters.teamSpaceId = teamSpaceId
+        }
+      }
+      const userRes = await dispatch(guestLogin(params))
       setLoading(false)
-      history.push('/')
+      if (!userRes.firstName || !userRes.lastName || !userRes.nickName || !userRes.email) {
+        history.push({
+          pathname: '/profile',
+          search: location.search,
+        })
+      } else {
+        history.push({
+          pathname: '/',
+          search: location.search,
+        })
+      }
     } catch (error) {
-      throw error
+      NotificationManager.error(
+        error?.message ||
+          error?.response?.data?.messsage ||
+          error.toString() ||
+          'Signup Failed. Something went worng',
+      )
+      setLoading(false)
     }
   }
+
   const handleSubmit = async (e) => {
     if (loading) return
     try {
@@ -57,17 +87,21 @@ function Login() {
           loginDetails.fields.email,
           loginDetails.fields.password,
         )
+        if (!res.user.emailVerified) {
+          res.user.sendEmailVerification({ url: getContinueURL(location.search) })
+          NotificationManager.error('Please check your inbox and verify your email address.')
+          setLoading(false)
+          return
+        }
         let params = {
           startParameters: {
-            firstName: res.user.displayName.split(' ')[0],
-            lastName: res.user.displayName.split(' ')[1],
-            nickName: res.user.displayName,
             email: res.user.email,
           },
           deviceId: res.user.uid,
+          // deviceId: sessionStorage.getItem(sessionkeys.deviceId),
+          // firebaseUid: res.user.uid,
         }
-        await dispatch(guestLogin(params))
-        onSuccessLogin()
+        onLogin(params)
       } else {
         return
       }
@@ -81,6 +115,7 @@ function Login() {
       setLoading(false)
     }
   }
+
   const handleChange = (e, field) => {
     let fields = loginDetails.fields
     let errors = loginDetails.errors
@@ -88,49 +123,7 @@ function Login() {
     errors[field] = undefined
     setLoginDetails({ ...loginDetails, fields, errors })
   }
-  const socialSignIn = async (platform) => {
-    try {
-      setLoading(true)
-      if (platform === 'facebook') {
-        let response = await doSignInWithFacebook()
-        let params = {
-          startParameters: {
-            firstName: response.additionalUserInfo.profile.first_name,
-            lastName: response.additionalUserInfo.profile.last_name,
-            nickName: response.additionalUserInfo.profile.name,
-            email: response.additionalUserInfo.profile.email,
-          },
-          deviceId: response.user.uid,
-        }
-        console.log(params)
-        await dispatch(guestLogin(params))
-        onSuccessLogin()
-        console.log(response)
-      } else if (platform === 'google') {
-        let response = await doSignInWithGoogle()
-        let params = {
-          startParameters: {
-            firstName: response.additionalUserInfo.profile.given_name,
-            lastName: response.additionalUserInfo.profile.family_name,
-            nickName: response.additionalUserInfo.profile.name,
-            email: response.additionalUserInfo.profile.email,
-          },
-          deviceId: response.user.uid,
-        }
-        console.log(params)
-        await dispatch(guestLogin(params))
-        onSuccessLogin()
-      }
-    } catch (error) {
-      NotificationManager.error(
-        error?.message ||
-          error?.response?.data?.messsage ||
-          error.toString() ||
-          'Signup Failed. Something went worng',
-      )
-      setLoading(false)
-    }
-  }
+
   return (
     <div className="page_container">
       <div className="box">
@@ -158,7 +151,15 @@ function Login() {
               onChange={(e) => handleChange(e, 'password')}
             />
           </div>
-          <div className="navLink fgPass mt-1" onClick={() => history.push('forgotPass')}>
+          <div
+            className="navLink fgPass mt-1"
+            onClick={() =>
+              history.push({
+                pathname: '/forgotPass',
+                search: location.search,
+              })
+            }
+          >
             Forgot Password?
           </div>
           <div className="button mt-3" onClick={handleSubmit}>
@@ -169,22 +170,20 @@ function Login() {
           </div>
           <OrHorizontalBar />
           <div className="mt-2 mb-2 text-center">Login with social media</div>
-          <div className="row justify-content-center ml-1 mr-1">
-            <div className=" col-md-4 button fbBtn" onClick={() => socialSignIn('facebook')}>
-              <i className="fa fa-facebook" style={{ fontSize: 24 }}></i>
-            </div>
-            <div className=" col-md-4 button appleBtn" onClick={() => {}}>
-              <i className="fa fa-apple" style={{ fontSize: 24 }}></i>
-            </div>
-            <div className=" col-md-4 button googleBtn" onClick={() => socialSignIn('google')}>
-              <i className="fa fa-google" style={{ fontSize: 24 }}></i>
-            </div>
-          </div>
+          <SocialLogin setLoading={setLoading} onLogin={onLogin} />
         </form>
       </div>
       <div className="mt-2 mb-5">
         Didn't have an account yet?{' '}
-        <span className="navLink mt-2 mb-5" onClick={() => history.push('register')}>
+        <span
+          className="navLink mt-2 mb-5"
+          onClick={() =>
+            history.push({
+              pathname: 'register',
+              search: location.search,
+            })
+          }
+        >
           Sign Up
         </span>
       </div>

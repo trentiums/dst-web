@@ -1,6 +1,10 @@
 import * as userTypes from './userTypes'
-import Api, { urls, setCookie, setAuthorization } from '../../../services/api'
+import Api, { urls, setAuthorization } from '../../../services/api'
+import * as teamSpaceTypes from '../teamSpace/teamSpaceTypes'
+import * as keysAction from '../keys/keysAction'
 import { auth } from '../../../services/firebase'
+import { keys, setKeyValue, removeKey, sessionkeys } from '../../../services/localStorage'
+
 export const userUpdateSuccess = (response) => {
   return {
     type: userTypes.USER_UPDATE_SUCCESS,
@@ -32,38 +36,40 @@ export const updateUserPicture = (picture) => async (dispatch, getState) => {
     return Promise.reject()
   }
 }
+export const getUserImage = (url) => async () => {
+  try {
+    const response = await Api.get(url, { responseType: 'arraybuffer' }).then((response) =>
+      Buffer.from(response.data, 'binary').toString('base64'),
+    )
+    return Promise.resolve(`data:image/jpeg;base64,${response}`)
+  } catch (e) {
+    return Promise.reject()
+  }
+}
 export const guestLogin = (params) => async (dispatch) => {
   try {
     const response = await Api.post(`${urls.guestLogin}?deviceId=${params.deviceId}`)
-    setCookie(response.data.cookie)
+    await dispatch(keysAction.storeCookieStart(response.data.cookie))
     params.storedCookie = response.data.cookie
-    await Api.post(`${urls.register}`, {})
     const res = await Api.post(`${urls.userLogin}`, params)
+    await setKeyValue(sessionkeys.deviceId, params.deviceId)
+    await setKeyValue(keys.firebaseUid, params.firebaseUid)
+    dispatch({
+      type: teamSpaceTypes.FETCH_USER_TEAMSPACE_SUCCESS,
+      payload: res.data.teamSpaceList,
+    })
     setAuthorization({
       username: res.data.userDevice.user.username,
       password: res.data.userDevice.user.username,
     })
-    if (params?.startParameters?.picture && res?.data?.userDevice?.user?.uid) {
-      await Api.put(`user/${res.data.userDevice.user.uid}${urls.userPicbase}`, {
-        picture: params.startParameters.picture,
-      })
-      const userProfile = await Api.get(`${urls.userDetails}/${res.data.userDevice.user.uid}`)
-      dispatch(
-        userUpdateSuccess({
-          ...userProfile.data,
-          deviceId: params.deviceId,
-        }),
-      )
-    } else if (res?.data?.userDevice?.user?.uid) {
-      const userProfile = await Api.get(`${urls.userDetails}/${res.data.userDevice.user.uid}`)
-      dispatch(
-        userUpdateSuccess({
-          ...userProfile.data,
-          deviceId: params.deviceId,
-        }),
-      )
+    const userProfile = await Api.get(`${urls.userDetails}/${res.data.userDevice.user.uid}`)
+    const userParam = {
+      ...userProfile.data,
+      deviceId: params.deviceId,
+      firebaseUid: params.firebaseUid,
     }
-    return Promise.resolve()
+    dispatch(userUpdateSuccess(userParam))
+    return Promise.resolve(userParam)
   } catch (e) {
     console.log(e)
     return Promise.reject(e)
@@ -72,6 +78,9 @@ export const guestLogin = (params) => async (dispatch) => {
 
 export const userLogout = () => async (dispatch) => {
   await auth.signOut()
+  // await sessionStorage.removeItem(sessionkeys.deviceId)
+  await removeKey(sessionkeys.deviceId)
+  await removeKey(keys.firebaseUid)
   dispatch({
     type: userTypes.USER_LOGOUT,
   })
@@ -79,30 +88,4 @@ export const userLogout = () => async (dispatch) => {
 
 export const setApiCredentials = (username, password) => () => {
   setAuthorization({ username, password })
-}
-
-export const userLoginSuccess = (response) => {
-  return {
-    type: userTypes.USER_LOGIN_SUCCESS,
-    payload: response,
-  }
-}
-
-export const getUserProfile = () => async (dispatch, getState) => {
-  try {
-    if (!getState().user.uid) {
-      const user = {}
-      return Promise.resolve(user)
-    }
-    const { data: user } = await Api.get(urls.userDetails.format(getState().user.uid))
-    return Promise.resolve(user)
-  } catch (e) {
-    if (typeof e !== 'undefined') {
-      // showMessage({
-      //   type: Config.INFORMATION_LEVEL['ERROR'],
-      //   text: 'Server error. Could not modify user data',
-      // })
-      console.log(e)
-    }
-  }
 }

@@ -1,20 +1,21 @@
 import React, { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleNavOption } from '../../redux/actions/sidebar/sidebarAction'
-import { teamSpaceList } from '../../data/routesList'
 import images from '../../assets/images'
-import Api from '../../services/api'
 import { userLogout } from '../../redux/actions/user/userAction'
 import SideBarListItem from '../../components/sideBarListItem'
 
-function Sidebar({ setShow }) {
+function Sidebar({ setShow, profileURL }) {
   const dispatch = useDispatch()
   const [tSListToggle, setTSListToggle] = useState(true)
-  const { navOption, uid, user } = useSelector((state) => ({
+  const { navOption, uid, user, teamspace } = useSelector((state) => ({
     navOption: state.sidebar.navOption,
     uid: state.user.uid,
     user: state.user,
+    teamspace: state.teamspace,
   }))
+  const isValidUser =
+    user.firstName && user.lastName && user.nickName && user.email && user.photoPath && uid
   return (
     <div>
       {uid && (
@@ -25,22 +26,28 @@ function Sidebar({ setShow }) {
               className="profileContainer_mb"
               linkTo="./profile"
               text={user.nickName}
-              imgSrc={`${Api.defaults.baseURL}${user.photoPath}`}
+              imgSrc={profileURL}
             />
           )}
-          <SideBarListItem
-            keyValue={`sidebar-teamspace`}
-            className="borderItem"
-            linkTo="#"
-            text="Team Spaces"
-            isSpecial={true}
-            iconName="fa fa-plus"
-            arrowIcon={!tSListToggle ? 'fa fa-caret-down' : 'fa fa-caret-up'}
-            tooltip="Create a new team space"
-            onClick={(field) => (field === 'text' ? setTSListToggle(!tSListToggle) : setShow(true))}
-          />
-          {tSListToggle &&
-            teamSpaceList.map((link, index) => (
+          {isValidUser && (
+            <SideBarListItem
+              keyValue={`sidebar-teamspace`}
+              className="borderItem"
+              linkTo="#"
+              text="Team Spaces"
+              isSpecial={true}
+              iconName="fa fa-plus"
+              arrowIcon={!tSListToggle ? 'fa fa-caret-down' : 'fa fa-caret-up'}
+              tooltip="Create a new team space"
+              onClick={(field) =>
+                field === 'text' ? setTSListToggle(!tSListToggle) : setShow(true)
+              }
+            />
+          )}
+          {isValidUser &&
+            tSListToggle &&
+            teamspace?.teamSpaceList &&
+            teamspace.teamSpaceList.map((link, index) => (
               <SideBarListItem
                 key={`sidebar-${index}-teamspace`}
                 keyValue={`sidebar-${index}-teamspace`}

@@ -156,6 +156,12 @@
   margin-top: 3;
   margin-right: 10;
 }
+.barAvatarImg {
+  margin-right: 5px;
+  margin-top: 3;
+  margin-right: 10;
+  border-radius: 50%;
+}
 .arrowContainer {
   display: flex;
   align-items: center;

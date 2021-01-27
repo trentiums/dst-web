@@ -2,15 +2,16 @@ import React, { memo, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NotificationManager } from 'react-notifications'
 import images from '../assets/images'
-import { updateUserPicture, updateUserInfo } from '../redux/actions/user/userAction'
+import { updateUserPicture, updateUserInfo, getUserImage } from '../redux/actions/user/userAction'
 import Api from '../services/api'
+import { auth } from '../services/firebase'
 
 function Profile() {
   const initialState = {
     fields: {},
     errors: {},
   }
-  const [selectedAvatarIndex, setSelectedAvatarIndex] = useState(0)
+  const [selectedAvatarIndex, setSelectedAvatarIndex] = useState(null)
   const [profileURL, setProfileURL] = useState(null)
   const [profileDetails, setProfileDetails] = useState(initialState)
   const [loading, setLoading] = useState(false)
@@ -28,9 +29,13 @@ function Profile() {
         email: user.email,
       },
     })
+    const getImage = async (url) => {
+      let response = await dispatch(getUserImage(url))
+      setProfileURL(response)
+    }
     if (user?.photoPath) {
       setSelectedAvatarIndex(null)
-      setProfileURL(`${Api.defaults.baseURL}${user.photoPath}`)
+      getImage(`${Api.defaults.baseURL}${user.photoPath}`)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
@@ -74,9 +79,16 @@ function Profile() {
           username: user.username,
           uid: user.uid,
         }
-        console.log(selectedAvatarIndex)
+        await auth.currentUser.updateProfile({
+          firstName: params.firstName,
+          lastName: params.lastName,
+          displayName: params.nickName,
+        })
         if (selectedAvatarIndex !== null) {
-          let picture = images.avatars[selectedAvatarIndex].replace('data:image/png;base64,', '')
+          let picture = images.avatars[selectedAvatarIndex - 1].replace(
+            'data:image/png;base64,',
+            '',
+          )
           await dispatch(updateUserPicture(picture))
         }
         await dispatch(updateUserInfo(params))
@@ -104,7 +116,7 @@ function Profile() {
     setProfileDetails({ ...profileDetails, fields, errors })
   }
   const onSelectAvatar = (e, index) => {
-    setSelectedAvatarIndex(index)
+    setSelectedAvatarIndex(index + 1)
   }
 
   return (
@@ -112,11 +124,13 @@ function Profile() {
       <div className="box">
         <form className="form-signin " onSubmit={handleSubmit}>
           <div className="imgContainer mb-3">
-            <img
-              src={selectedAvatarIndex ? images.avatars[selectedAvatarIndex] : profileURL}
-              className="avatarImg"
-              alt=""
-            />
+            {profileURL && (
+              <img
+                src={selectedAvatarIndex ? images.avatars[selectedAvatarIndex - 1] : profileURL}
+                className="avatarImg"
+                alt=""
+              />
+            )}
           </div>
           <div className="row">
             <div className="col-md-6">
