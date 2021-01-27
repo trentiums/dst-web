@@ -1,6 +1,6 @@
 import { memo, useEffect } from 'react'
 import * as keysAction from '../redux/actions/keys/keysAction'
-import { keys, getKeyValue } from '../services/localStorage'
+import { sessionkeys, getKeyValue } from '../services/localStorage'
 import { guestLogin } from '../redux/actions/user/userAction'
 import { useDispatch } from 'react-redux'
 import Router from '../router'
@@ -16,9 +16,10 @@ function RootContainer() {
     if (cookie) {
       await dispatch(keysAction.storeCookieStart(cookie))
     }
-    const deviceId = await getKeyValue(keys.deviceId)
-    const firebaseUid = await getKeyValue(keys.firebaseUid)
-    console.log(firebaseUid, deviceId)
+    const deviceId = await getKeyValue(sessionkeys.deviceId)
+    // const firebaseUid = await getKeyValue(keys.firebaseUid)
+    // const deviceId = sessionStorage.getItem(sessionkeys.deviceId)
+    // console.log(firebaseUid, deviceId)
     if (deviceId && cookie) {
       let params = {
         deviceId,

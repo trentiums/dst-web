@@ -8,6 +8,7 @@ import OrHorizontalBar from '../components/orHorizontalBar'
 import { guestLogin } from '../redux/actions/user/userAction'
 import SocialLogin from '../components/socialLogin'
 import { getContinueURL } from '../services/api'
+// import { sessionkeys } from '../services/localStorage'
 
 function Login() {
   const initialState = {
@@ -97,7 +98,7 @@ function Login() {
             email: res.user.email,
           },
           deviceId: res.user.uid,
-          // deviceId: sessionStorage.getItem('deviceId'),
+          // deviceId: sessionStorage.getItem(sessionkeys.deviceId),
           // firebaseUid: res.user.uid,
         }
         onLogin(params)

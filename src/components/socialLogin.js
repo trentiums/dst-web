@@ -1,10 +1,11 @@
 import React, { memo } from 'react'
 import { NotificationManager } from 'react-notifications'
 import { doSignInWithGoogle, doSignInWithFacebook, doSignInWithApple } from '../services/firebase'
+// import { sessionkeys } from '../services/localStorage'
 
 function socialLogin({ setLoading, onLogin }) {
   const onSocialBtnPressed = async (platform) => {
-    const deviceId = sessionStorage.getItem('deviceId')
+    // const deviceId = sessionStorage.getItem(sessionkeys.deviceId)
     try {
       setLoading(true)
       if (platform === 'facebook') {
@@ -17,7 +18,7 @@ function socialLogin({ setLoading, onLogin }) {
             nickName: profile.name,
             email: profile.email,
           },
-          deviceId,
+          deviceId: response.user.uid,
           firebaseUid: response.user.uid,
         }
         onLogin(params)
@@ -31,7 +32,7 @@ function socialLogin({ setLoading, onLogin }) {
             nickName: profile.displayName,
             email: profile.email,
           },
-          deviceId,
+          deviceId: response.user.uid,
           firebaseUid: response.user.uid,
         }
         onLogin(params)
@@ -45,7 +46,7 @@ function socialLogin({ setLoading, onLogin }) {
             nickName: profile.name,
             email: profile.email,
           },
-          deviceId,
+          deviceId: response.user.uid,
           firebaseUid: response.user.uid,
         }
         onLogin(params)

@@ -3,7 +3,7 @@ import Api, { urls, setAuthorization } from '../../../services/api'
 import * as teamSpaceTypes from '../teamSpace/teamSpaceTypes'
 import * as keysAction from '../keys/keysAction'
 import { auth } from '../../../services/firebase'
-import { keys, setKeyValue, removeKey } from '../../../services/localStorage'
+import { keys, setKeyValue, removeKey, sessionkeys } from '../../../services/localStorage'
 
 export const userUpdateSuccess = (response) => {
   return {
@@ -52,7 +52,7 @@ export const guestLogin = (params) => async (dispatch) => {
     await dispatch(keysAction.storeCookieStart(response.data.cookie))
     params.storedCookie = response.data.cookie
     const res = await Api.post(`${urls.userLogin}`, params)
-    await setKeyValue(keys.deviceId, params.deviceId)
+    await setKeyValue(sessionkeys.deviceId, params.deviceId)
     await setKeyValue(keys.firebaseUid, params.firebaseUid)
     dispatch({
       type: teamSpaceTypes.FETCH_USER_TEAMSPACE_SUCCESS,
@@ -78,7 +78,8 @@ export const guestLogin = (params) => async (dispatch) => {
 
 export const userLogout = () => async (dispatch) => {
   await auth.signOut()
-  await removeKey(keys.deviceId)
+  // await sessionStorage.removeItem(sessionkeys.deviceId)
+  await removeKey(sessionkeys.deviceId)
   await removeKey(keys.firebaseUid)
   dispatch({
     type: userTypes.USER_LOGOUT,
