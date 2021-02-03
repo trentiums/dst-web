@@ -1,6 +1,5 @@
 import React, { memo,useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
-import images from '../../assets/images'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -14,14 +13,14 @@ function CalendarModal({ isShow, setShow }) {
         setEndDate(end);
         console.log(startDate,"ssss",endDate)
     }
-     const onDateSelect = (dates,endt) => {
-            console.log(endt)
-            const [start, end] = dates;
-            setStartDate(start);
-            setEndDate(end);
-            console.log(startDate,"ssss",endDate)
+    //  const onDateSelect = (dates,endt) => {
+    //         console.log(endt)
+    //         const [start, end] = dates;
+    //         setStartDate(start);
+    //         setEndDate(end);
+    //         console.log(startDate,"ssss",endDate)
     
-        }
+    //     }
     return (
         <div>
             <Modal show={isShow} onHide={() => setShow(false)}>
@@ -36,7 +35,6 @@ function CalendarModal({ isShow, setShow }) {
                                         maxDate={new Date()}
                                         selected={startDate}
                                         dateFormat="dd/MM/yyyy"
-                                        selected={startDate}
                                         // onSelect={onDateSelect}
                                         onChange={onDateChange}
                                         startDate={startDate}

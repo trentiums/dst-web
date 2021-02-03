@@ -1,14 +1,8 @@
 import React, { memo, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import HistoryModal from '../components/commonModals/historyModal'
 import CalendarModal from '../components/commonModals/calendarModal'
-
-import HeaderBtn from '../components/headerBtn'
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
 import { NotificationManager } from 'react-notifications'
-import images, { cards } from '../assets/images'
 import "../style.css"
 function LayoutScreen() {
     const initialState = {
@@ -16,14 +10,14 @@ function LayoutScreen() {
         errors: {},
     }
     // const [date, setDate] = useState('');
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(null);
+    // const [startDate, setStartDate] = useState(new Date());
+    // const [endDate, setEndDate] = useState(null);
     const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false)
     const [selectedHistory, setSelectedHistory] = useState({ showModal: false })
-    const [historyIndex, setHistoryIndex] = useState(null)
+    // const [historyIndex, setHistoryIndex] = useState(null)
     const [search, setSearch] = useState(initialState)
-    const history = useHistory()
+    // const history = useHistory()
 
     const enableCalendar = () => {
         setShow(true)
