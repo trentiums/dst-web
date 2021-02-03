@@ -61,7 +61,7 @@ export const createCorrelationInterceptor = () => {
   })
 }
 
-export const URL = 'http://localhost:3000'
+export const URL = getCurrentEnv()
 
 export const getContinueURL = (url) => {
   return URL + '/login' + url
