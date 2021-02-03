@@ -6,11 +6,36 @@
   justify-content: center;
   z-index: 9999;
 }
+.footer_mb{
+  display:none !important;
+}
+.sidebar-footer-section{
+  display:flex;
+  flex:1;
+  width:100%;
+  flex-direction: column;
+}
+.middle-sidebar{
+  flex:0.8;
+  width:100%;
+}
+.footer-position{
+  width:100%;
+  font-size: 12px;
+}
+/* .footer_mb:hover {
+  color: #0286BE;
+  text-decoration: none;
+} */
 @media only screen and (max-width: 767px) {
-  .footer {
+  .text-right {
     display: none;
   }
+  .footer_mb{
+  display: block !important;
+  }
 }
+
 .ft-link {
   color: rgba(2, 134, 190, 1);
   font-size: 16px;

@@ -4,6 +4,7 @@ import { toggleNavOption } from '../../redux/actions/sidebar/sidebarAction'
 import images from '../../assets/images'
 import { userLogout } from '../../redux/actions/user/userAction'
 import SideBarListItem from '../../components/sideBarListItem'
+import "../footer/footer.css"
 
 function Sidebar({ setShow, profileURL }) {
   const dispatch = useDispatch()
@@ -63,6 +64,44 @@ function Sidebar({ setShow, profileURL }) {
             text="Logout"
             iconName="fa fa-sign-out"
           />
+          <div className="sidebar-footer-section">
+            <div className="middle-sidebar"></div>
+            <div className="footer-position">
+              <SideBarListItem
+                keyValue={`sidebar-footer1`}
+                className="footer_mb"
+                onClick={() => window.open('https://scrumpanion.com/terms-and-conditions/')}
+                text="Terms and Conditions"
+              />
+              <SideBarListItem 
+                keyValue={`sidebar-footer2`}
+                className="footer_mb"
+                onClick={() => window.open('https://scrumpanion.com/privacy-policy/')}
+                text="Privacy Policy"
+              />
+              <SideBarListItem
+                keyValue={`sidebar-footer3`}
+                className="footer_mb"
+                onClick={() => window.open('https://scrumpanion.com/')}
+                text="Scrum Guide"
+              />
+              <SideBarListItem
+                keyValue={`sidebar-footer4`}
+                className="footer_mb"
+                onClick={() => {
+                  const params = {
+                    subject: 'Scrumpanion - Contact Support',
+                    body: `Please explain the issue you are having and we will get to it as soon as possible.`,
+                  }
+                  window.open(
+                    `mailto:support@scrumpanion.com?subject=${params.subject}&body=${params.body}`,
+                  )
+                }}
+                text="Contact Support"
+              />
+            </div>
+          </div>
+
           {/* Bottom arrow to show full and hide full sidebar (Only in Web) */}
           <div onClick={() => dispatch(toggleNavOption(!navOption))} className="arrowContainer">
             <img

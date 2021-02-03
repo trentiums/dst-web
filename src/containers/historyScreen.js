@@ -1,19 +1,33 @@
 import React, { memo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import HistoryModal from '../components/commonModals/historyModal'
+import CalendarModal from '../components/commonModals/calendarModal'
+
 import HeaderBtn from '../components/headerBtn'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import { NotificationManager } from 'react-notifications'
 import images, { cards } from '../assets/images'
 import "../style.css"
-import Calendar from 'react-calendar';
 function LayoutScreen() {
     const initialState = {
         fields: {},
         errors: {},
     }
+    // const [date, setDate] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(null);
     const [loading, setLoading] = useState(false)
+    const [show, setShow] = useState(false)
+    const [selectedHistory, setSelectedHistory] = useState({ showModal: false })
     const [historyIndex, setHistoryIndex] = useState(null)
     const [search, setSearch] = useState(initialState)
     const history = useHistory()
+
+    const enableCalendar = () => {
+        setShow(true)
+    }
     const handleSubmit = async (e) => {
         if (loading) return
         try {
@@ -40,12 +54,17 @@ function LayoutScreen() {
         setSearch({ ...search, fields, errors })
     }
 
-
     return (
+
         <div className="page_container">
+            <HistoryModal selectedHistory={selectedHistory} setSelectedHistory={setSelectedHistory} />
             <div className="history-header-container">
                 <form classname="row " style={{ width: "100%", display: 'flex' }}>
-                    <div className="" style={{ display: 'flex', flex: "0.25" }}> {/* <Calendar/> */}</div>
+                    <div className="" style={{ display: 'flex', justifyContent: 'flex-end', flex: "0.25" }}>
+                        <CalendarModal isShow={show} setShow={setShow} />
+                        <i className="fa fa-calendar " style={{ fontSize: "24px" }} onClick={enableCalendar}></i>
+
+                    </div>
                     <div className="col-md-8" style={{ display: 'flex', flex: "0.5" }}>
                         <input
                             type="search"
@@ -60,20 +79,32 @@ function LayoutScreen() {
             </div>
             <div className="col-md-8 history-content-list" >
                 {[
-                    '#ea5153',
-                    '#CEBCFF',
-                    '#FAC78C',
-                    '#c4da90',
-                    '#969FDD',
-                    '#4796C6',
-                    '#ED9494',
-                    '#D66464',
-                    '#D11F1F',
-                    '#F6D965',
-                    '#BCEDA8',
-                    '#EDE8B4',
-                ].map((color, i) => (
-                    <div className="insideRow">
+                    {
+                        issueName: 'ravi',
+                        users: [{
+                            issueName: "ravindra1",
+                            card: "ONE"
+                        }]
+                    },
+                    {
+                        issueName: "ravindra1",
+                        users: [{
+                            issueName: "ravindra1",
+                            card: "ONE"
+                        }]
+                    },
+                    {
+                        issueName: "ravindra2",
+                        users: [{
+                            issueName: "ravindra1",
+                            card: "ONE"
+                        }]
+                    }
+                ].map((historyObj, i) => (
+                    <div className="insideRow" onClick={() =>
+                        setSelectedHistory({ ...historyObj, showModal: true })
+                    }>
+
                         <div className="insideRowA" style={{ display: "flex", flex: "0.5" }}>
                             <div>
                                 01/29/2021
@@ -96,7 +127,7 @@ function LayoutScreen() {
             <div className="button mt-3 mb-3" style={{ width: "60%" }} onClick={handleSubmit}>
                 <div className="buttonText"><b>Share</b></div>
             </div>
-        </div>
+        </div >
     )
 }
 export default memo(LayoutScreen)
