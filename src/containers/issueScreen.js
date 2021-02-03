@@ -58,7 +58,8 @@ function IssueScreen() {
               <div className="pr-3">Layout</div>
             </button>
             <div style={{ flex: 1 }}></div>
-            <button className="row" style={{ backgroundColor: '#ffffff', border: 0 }}>
+            <button className="row" style={{ backgroundColor: '#ffffff', border: 0 }}
+             onClick={() => history.push('/historyScreen')} >
               <div>History</div>
               <i className="fa fa-history ml-2" style={{ fontSize: 25, color: '#0286be' }}></i>
             </button>

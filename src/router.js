@@ -10,6 +10,7 @@ const ForgotPassword = lazy(() => import('./containers/forgotPassword'))
 const Profile = lazy(() => import('./containers/profile'))
 const IssueScreen = lazy(() => import('./containers/issueScreen'))
 const LayoutScreen = lazy(() => import('./containers/layoutScreen'))
+const HistoryScreen = lazy(() => import('./containers/historyScreen'))
 const EstimationScreen = lazy(() => import('./containers/estimationScreen'))
 const ResultScreen = lazy(() => import('./containers/resultScreen'))
 const ErrorPage = lazy(() => import('./containers/errorPage'))
@@ -30,6 +31,7 @@ function Router() {
         {uid && <Route exact path="/profile" component={Profile} />}
         {uid && <Route exact path="/issueScreen" component={IssueScreen} />}
         {uid && <Route exact path="/layoutScreen" component={LayoutScreen} />}
+        {uid && <Route exact path="/historyScreen" component={HistoryScreen} />}
         {uid && <Route exact path="/estimationScreen" component={EstimationScreen} />}
         {uid && <Route exact path="/resultScreen" component={ResultScreen} />}
         <Route component={ErrorPage} />
