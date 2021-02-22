@@ -52,7 +52,7 @@ function SideBarListItem({
       <EditTeamspace isShow={show} setShow={setShow} />
       <Link to={isSpecial ? '#' : linkTo} >
         <div className="sideBarItemText">
-          <div style={{ flex: "0.7" }} onClick={() => { console.log("object") }}>{text}</div>
+          <div style={{ flex: "0.7" }} onClick={() => ''}>{text}</div>
           {editOption && (<div style={{ flex: "0.1" }}
             onMouseEnter={() => (isSpecial ? setHoverIndex(-1) : '')}
             onMouseLeave={() => (isSpecial ? setHoverIndex(keyValue) : '')}
