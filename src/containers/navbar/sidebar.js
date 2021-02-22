@@ -8,12 +8,34 @@ import SideBarListItem from '../../components/sideBarListItem'
 function Sidebar({ setShow, profileURL }) {
   const dispatch = useDispatch()
   const [tSListToggle, setTSListToggle] = useState(true)
-  const { navOption, uid, user, teamspace } = useSelector((state) => ({
+  const { navOption, uid, user, teamspace } = useSelector((state) => (console.log(state), {
     navOption: state.sidebar.navOption,
     uid: state.user.uid,
     user: state.user,
     teamspace: state.teamspace,
   }))
+  let teamspaceData = {
+    teamSpaceList: [
+      {
+        teamSpaceName: "a"
+      },
+      {
+        teamSpaceName: "b"
+      },
+      {
+        teamSpaceName: "c"
+      },
+      {
+        teamSpaceName: "d"
+      },
+      {
+        teamSpaceName: "e"
+      },
+      {
+        teamSpaceName: "f"
+      },
+    ]
+  }
   const isValidUser =
     user.firstName && user.lastName && user.nickName && user.email && user.photoPath && uid
   return (
@@ -21,6 +43,7 @@ function Sidebar({ setShow, profileURL }) {
       {uid && (
         <ul className={navOption ? 'active' : ''}>
           {uid && user && (
+
             <SideBarListItem
               keyValue={`sidebar-profile`}
               className="profileContainer_mb"
@@ -30,6 +53,7 @@ function Sidebar({ setShow, profileURL }) {
             />
           )}
           {isValidUser && (
+
             <SideBarListItem
               keyValue={`sidebar-teamspace`}
               className="borderItem"
@@ -44,17 +68,22 @@ function Sidebar({ setShow, profileURL }) {
               }
             />
           )}
-          {isValidUser &&
-            tSListToggle &&
-            teamspace?.teamSpaceList &&
-            teamspace.teamSpaceList.map((link, index) => (
-              <SideBarListItem
-                key={`sidebar-${index}-teamspace`}
-                keyValue={`sidebar-${index}-teamspace`}
-                linkTo="./issueScreen"
-                text={link.teamSpaceName}
-              />
-            ))}
+          <div style={{ overflow: "scroll", width: "100%", height: "50%" }}>
+            {isValidUser &&
+              tSListToggle &&
+              teamspaceData?.teamSpaceList &&
+              teamspaceData.teamSpaceList.map((link, index) => (
+                <SideBarListItem
+                  key={`sidebar-${index}-teamspace`}
+                  keyValue={`sidebar-${index}-teamspace`}
+                  isSpecial={true}
+                  linkTo="/issueScreen"
+                  text={link.teamSpaceName}
+                  editOption={true}
+                />
+              ))}
+          </div>
+
           <SideBarListItem
             keyValue={`sidebar-logout`}
             className="borderItem"
