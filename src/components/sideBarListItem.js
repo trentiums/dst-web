@@ -1,8 +1,10 @@
 import React, { memo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
-import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
+import deleteLogo from "../assets/images/icons/delete.png"
+import editLogo from "../assets/images/icons/edit.png"
+import "./sidebarList.css";
 import EditTeamspace from './editTeamspace'
 function SideBarListItem({
   keyValue,
@@ -30,7 +32,9 @@ function SideBarListItem({
       }}
     >
       {children}
-      <span className="threedots"  ><i class="fa fa-ellipsis-v col-1 mt-1 " style={{ fontSize: "16px" }} /></span>
+      <span >
+        <i class="fa fa-ellipsis-v col-1 mt-1 " style={{ fontSize: "16px" }} />
+      </span>
     </a>
   ));
   const showDropdown = () => {
@@ -56,34 +60,23 @@ function SideBarListItem({
           >
             <Dropdown >
               <Dropdown.Toggle as={CustomToggle} />
-              <Dropdown.Menu style={{ backgroundColor: "white" }}>
-                <Dropdown.Item onClick={() =>
-                  // console.log("object")
+              <Dropdown.Menu className="dropdownMenu" style={{ backgroundColor: "white", borderRadius: "5px" }}>
+                <Dropdown.Item style={{ padding:"0px 8px 0px 8px",display: "flex" }} onClick={() =>
                   setShow(true)
                 }>
-                  <div style={{ width: "100%", display: "flex" }}>
-                    <p style={{ color: "black" }} >edit</p>
-                    <p><i class='fa fa-edit'></i></p>
-                  </div>
+                  <p style={{  color: "black",top:"8px",flex:"0.9" }} >Edit</p>
+                   <p style={{flex:"0.1"}}>
+                    <img src={editLogo} style={{ width: '14px' }}></img>
+                  </p>
                 </Dropdown.Item>
-                <Dropdown.Item style={{ display: "flex" }} >
-                  <div style={{ width: "100%", display: "flex" }}>
-                    <p style={{ color: "black" }} >delete</p>
-                    <p style={{ justifyContent:"flex-end" }}><i class="fa fa-trash-o"></i></p>
-                  </div>
+                <Dropdown.Item style={{ display: "flex", padding:"0px 8px 0px 8px" }} >
+                  <p style={{ color: "black",flex:"0.9" }} >Delete</p>
+                  <p style={{flex:"0.1"}}>         
+                      <img src={deleteLogo} style={{ width: '14px' }}></img>
+                  </p>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            {/* <i class="fa fa-ellipsis-v col-1 mt-1 " style={{ fontSize: "16px" }}>
-              {openBox && (
-              <div style={{float:"right"}}>
-                <ul style={{backgroundColor:"white",height:"10%",left:"98px",width:"10%" }}>
-                  <li style={{backgroundColor:"red"}}>Option 1</li>
-                  <li style={{backgroundColor:"yellow"}}>Option 2</li>
-                </ul>
-              </div>
-            )}
-            </i> */}
 
           </div>)}
           {arrowIcon && <i className={`${arrowIcon} sideBarItemArrowIcon `} />}
